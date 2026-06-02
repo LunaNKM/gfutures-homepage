@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-footer: #272725;
+  --color-accent: #0094ff;
+  --color-gray-mid: #a2a2a2;
+  --color-gray-soft: #d9d9d9;
+  --color-gray-bar: #a6a6a6;
+
+  /* 헤드라인: Helvetica Neue 계열 (영문 대문자 타이틀) */
+  --font-display: "Helvetica Neue", "Pretendard", Arial, sans-serif;
+  /* 본문 한글 */
+  --font-body: "Pretendard", "Helvetica Neue", Arial, sans-serif;
+  /* 로고 */
+  --font-logo: var(--font-outfit), "Helvetica Neue", sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --container: 1440px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 디자인이 1440px 고정폭이므로, 그보다 좁은 화면에서는 가로 스크롤 대신 축소 */
+.canvas {
+  width: 1440px;
+  margin-inline: auto;
+  transform-origin: top center;
+}
+
+.display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* 무한 루프(인피니티) 점 회전 */
+@keyframes loop-orbit {
+  from {
+    transform: rotate(0deg) translateX(245px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(245px) rotate(-360deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

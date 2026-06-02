@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# figma 작업 산출물 (앱 실행에 불필요, 용량 큼) — 추출 이미지는 public/figma 에 유지
+/figma-data
+.claude/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
