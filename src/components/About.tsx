@@ -1,4 +1,5 @@
 import { aboutBg } from "@/lib/images";
+import { CountUp } from "./Reveal";
 
 export default function About() {
   return (
@@ -17,7 +18,9 @@ export default function About() {
       </h2>
       <div className="absolute bottom-[100px] right-[80px] text-right text-white">
         <p className="display text-[65px] leading-none">Since 2020</p>
-        <p className="display mt-2 text-[165px] leading-none">D+2339</p>
+        <p className="display mt-2 text-[165px] leading-none">
+          <CountUp value="D+2339" />
+        </p>
       </div>
     </section>
   );
