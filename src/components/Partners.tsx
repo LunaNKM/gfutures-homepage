@@ -7,7 +7,7 @@ function Row({ reverse = false }: { reverse?: boolean }) {
       <div
         className="flex gap-[74px]"
         style={{
-          animation: `marquee ${reverse ? "32s" : "28s"} linear infinite`,
+          animation: `marquee ${reverse ? "64s" : "56s"} linear infinite`,
           animationDirection: reverse ? "reverse" : "normal",
         }}
       >

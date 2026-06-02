@@ -2,27 +2,26 @@
 
 import { useEffect, useRef, useState } from "react";
 
-function useInView<T extends HTMLElement>(once = true) {
+// 뷰포트 진입을 매번 감지한다(스크롤을 내릴 때/다시 올릴 때 모두 재생).
+// from: 요소가 화면 아래쪽에서 들어오면 "below", 위쪽에서 들어오면 "above".
+function useInView<T extends HTMLElement>() {
   const ref = useRef<T>(null);
   const [inView, setInView] = useState(false);
+  const [from, setFrom] = useState<"below" | "above">("below");
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) {
-          setInView(true);
-          if (once) io.disconnect();
-        } else if (!once) {
-          setInView(false);
-        }
+        setFrom(e.boundingClientRect.top >= 0 ? "below" : "above");
+        setInView(e.isIntersecting);
       },
       { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [once]);
-  return { ref, inView };
+  }, []);
+  return { ref, inView, from };
 }
 
 // 스크롤 진입 시 페이드 + 위로 올라오는 효과
@@ -37,14 +36,16 @@ export function FadeUp({
   className?: string;
   as?: React.ElementType;
 }) {
-  const { ref, inView } = useInView<HTMLDivElement>();
+  const { ref, inView, from } = useInView<HTMLDivElement>();
+  // 아래에서 올라올 땐 +40 → 페이드업, 위에서 내려올 땐 -40 → 페이드다운
+  const hidden = from === "above" ? "translateY(-40px)" : "translateY(40px)";
   return (
     <Tag
       ref={ref}
       className={className}
       style={{
         opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(40px)",
+        transform: inView ? "translateY(0)" : hidden,
         transition: `opacity 0.7s ease-out ${delay}s, transform 0.7s ease-out ${delay}s`,
       }}
     >
