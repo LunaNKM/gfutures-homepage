@@ -44,17 +44,21 @@ export default function WhoWeAre() {
           />
         ))}
 
-        {/* 통계 값/라벨 — 호버 시 검정 박스가 깔리고 텍스트가 흰색으로 반전 */}
+        {/* 통계 값/라벨 — 호버 시 기준선(가로선)에 딱 맞는 검정 박스가 깔리고 텍스트 흰색 반전.
+            박스 = 가로선과 동일한 left/width, 위는 가로선(433)·아래는 세로 구분선 끝(577)에 정렬 */}
         {stats.map((s, i) => (
           <div
             key={s.label}
             className="group absolute"
-            style={{ left: STAT_X[i], top: 433, width: 222, height: 142 }}
+            style={{ left: LINE_X[i], top: 433, width: 217, height: 144 }}
           >
-            {/* 호버 검정 박스 */}
+            {/* 호버 검정 박스 (기준선에 스냅) */}
             <div className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            {/* 텍스트 (호버 시 우측으로 25px 들여쓰기 + 흰색) */}
-            <div className="relative pt-[10px] transition-[padding] duration-300 group-hover:pl-[25px]">
+            {/* 텍스트: 숫자 위치(STAT_X)에 맞춰 배치, 호버 시 우측 25px 이동 + 흰색 */}
+            <div
+              className="absolute top-[10px] whitespace-nowrap transition-transform duration-300 group-hover:translate-x-[25px]"
+              style={{ left: STAT_X[i] - LINE_X[i] }}
+            >
               <p className="display text-[50px] leading-none transition-colors duration-300 group-hover:text-white">
                 <CountUp value={s.value} />
               </p>
