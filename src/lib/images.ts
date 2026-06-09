@@ -1,17 +1,11 @@
-// Figma에서 추출한 이미지 자산 매핑 (public/figma/*)
-// scripts/figma-fetch.mjs 로 갱신, figma-data/image-manifest.json 기준
-
-// Figma 히어로 배경 = 도쿄(아키하바라) 거리 이미지
 export const heroBg = "/figma/099b853b0d00768f.png";
 export const heroBgAlt = "/figma/d18a663fd0d42df2.png";
 export const aboutBg = "/figma/60b12f64ee6b91b3.jpg";
 export const japanBg = "/figma/fb3f9621199295a0.png";
 
-// MISSION / VISION 우측 이미지
 export const missionImg = "/figma/f91d138c2fd90fd4.png";
 export const visionImg = "/figma/4412c0485d51e00d.png";
 
-// CORE VALUE — G.O.A.T.S 세로 사진 스트립
 export const goats = [
   { letter: "G", img: "/figma/d8fbeb70bb5d5bd9.png" },
   { letter: "O", img: "/figma/32fca5de6e3cc466.png" },
@@ -20,37 +14,85 @@ export const goats = [
   { letter: "S", img: "/figma/382762784f3dcc90.png" },
 ];
 
-// PARTNERS & CLIENTS 로고 (흰색 로고, 검정 배경)
 export const partnerLogos = [
-  "/figma/07abd8bead9e96d3.png", // Beauty of Joseon
-  "/figma/e25fabbc2e2cc27f.jpg", // Abib
-  "/figma/b122d1e18c6df528.jpg", // channels4
-  "/figma/371d30f8506c908d.png", // REJURAN
-  "/figma/66ac7da96d90b2ad.png", // image 46
-  "/figma/e65943e8dbf21132.png", // SKIN LAB
-  "/figma/f5d6334f5a6be57f.png", // IMG_0447
-  "/figma/ea4f155c6fdf9e9f.png", // logo01
-  "/figma/e3f76035d03f52c3.png", // B-6
-  "/figma/d2be856dbfb285ea.jpg", // share-image-28
-  "/figma/017978693f08ffc8.jpg", // share-image-7c
-  "/figma/e6221aedc39469c0.jpg", // 510055268
+  "/figma/07abd8bead9e96d3.png",
+  "/figma/e25fabbc2e2cc27f.jpg",
+  "/figma/b122d1e18c6df528.jpg",
+  "/figma/371d30f8506c908d.png",
+  "/figma/66ac7da96d90b2ad.png",
+  "/figma/e65943e8dbf21132.png",
+  "/figma/f5d6334f5a6be57f.png",
+  "/figma/ea4f155c6fdf9e9f.png",
+  "/figma/e3f76035d03f52c3.png",
+  "/figma/d2be856dbfb285ea.jpg",
+  "/figma/017978693f08ffc8.jpg",
+  "/figma/e6221aedc39469c0.jpg",
 ];
 
-// SERVICE > INFLUENCER MARKETING — 회전문(coverflow) 카드용 인플루언서/뷰티 컷
+export const clientLogoRows = [
+  [
+    { label: "Biodance", src: "/figma/logos/client-biodance.png", width: 217 },
+    { label: "numbuzin", src: "/figma/logos/client-numbuzin.png", width: 228 },
+    { label: "d'Alba", src: "/figma/logos/client-dalba.png", width: 143 },
+    {
+      label: "Beauty of Joseon",
+      src: "/figma/logos/client-beauty-of-joseon.png",
+      width: 77,
+    },
+    { label: "Abib", src: "/figma/logos/client-abib.png", width: 120 },
+    {
+      label: "BRINGGREEN",
+      src: "/figma/logos/client-bringgreen.png",
+      width: 374,
+    },
+    { label: "sbdt", src: "/figma/logos/client-sbdt.png", width: 162 },
+    { label: "AYUNCHE", src: "/figma/logos/client-ayunche.png", width: 202 },
+    { label: "AGE20'S", src: "/figma/logos/client-age20s.png", width: 174 },
+    { label: "ILLIYOON", src: "/figma/logos/client-illiyoon.png", width: 241 },
+  ],
+  [
+    { label: "REJURAN", src: "/figma/logos/client-rejuran.png", width: 225 },
+    { label: "SKIN & LAB", src: "/figma/logos/client-skinlab.png", width: 278 },
+    { label: "AESTURA", src: "/figma/logos/client-aestura.png", width: 350 },
+    { label: "ETUDE", src: "/figma/logos/client-etude.png", width: 197 },
+    { label: "espoir", src: "/figma/logos/client-espoir.png", width: 153 },
+    { label: "MEDIHEAL", src: "/figma/logos/client-mediheal.png", width: 265 },
+    { label: "KUNDAL", src: "/figma/logos/client-kundal.png", width: 210 },
+    { label: "hetras", src: "/figma/logos/client-hetras.png", width: 176 },
+    {
+      label: "Donga Pharmaceutical",
+      src: "/figma/logos/client-donga.png",
+      width: 237,
+    },
+  ],
+];
+
+export const partnerSectionLogos = [
+  {
+    label: "AMOREPACIFIC",
+    src: "/figma/logos/partner-amorepacific.png",
+    width: 218,
+  },
+  { label: "TikTok", src: "/figma/logos/partner-tiktok.png", width: 139 },
+  { label: "lala", src: "/figma/logos/partner-lala.png", width: 153 },
+  { label: "GS Global", src: "/figma/logos/partner-gsglobal.png", width: 213 },
+  { label: "TBWA", src: "/figma/logos/partner-tbwa.png", width: 185 },
+  { label: "Johoro", src: "/figma/logos/partner-johoro.png", width: 120 },
+];
+
 export const influencerCards = [
-  "/figma/ee42d3422f08e387.png", // 2603 01-1
-  "/figma/178c1b1d6e6ce1a9.png", // 05 03-2
-  "/figma/cb49f4f308a1da86.png", // 리쥬란 5월 02
-  "/figma/8df371a5683c5c8e.png", // 스크린샷 2026-05-28 6.23.52
-  "/figma/03b40e374d18caea.png", // 스크린샷 2026-05-29
-  "/figma/32ecd3061b2fb9fa.png", // 아임프롬 01
-  "/figma/fab7f1f9a59bf905.png", // 스크린샷 2026-05-29 3.00.14
-  "/figma/79a4a01537d564dc.png", // 아임프롬 03-1
-  "/figma/f396bfb2105743f0.png", // 스크린샷 2026-05-29 3.01.33
-  "/figma/7d1fe7b0e32ea42f.png", // 스크린샷 2026-05-29 3.02.09
+  "/figma/ee42d3422f08e387.png",
+  "/figma/178c1b1d6e6ce1a9.png",
+  "/figma/cb49f4f308a1da86.png",
+  "/figma/8df371a5683c5c8e.png",
+  "/figma/03b40e374d18caea.png",
+  "/figma/32ecd3061b2fb9fa.png",
+  "/figma/fab7f1f9a59bf905.png",
+  "/figma/79a4a01537d564dc.png",
+  "/figma/f396bfb2105743f0.png",
+  "/figma/7d1fe7b0e32ea42f.png",
 ];
 
-// WORK — 대표 브랜드 작업 (라벨 + 썸네일)
 export const workBrands = [
   { label: "ESPOIR", img: "/figma/37269533b5a45361.png", tag: "japan" },
   { label: "FLONA", img: "/figma/6da609a82d409cf0.png", tag: "usa" },

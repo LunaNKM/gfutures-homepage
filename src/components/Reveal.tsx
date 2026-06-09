@@ -71,7 +71,6 @@ export function CountUp({
     if (!inView) return;
     const m = value.match(/(\d+(?:\.\d+)?)(?!.*\d)/); // 마지막 숫자
     if (!m) {
-      setDisplay(value);
       return;
     }
     const target = parseFloat(m[1]);

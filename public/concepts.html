@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WHAT WE DO — 인피니티 메탈릭 시안 4종</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: "Helvetica Neue", Arial, "Apple SD Gothic Neo", sans-serif;
+    padding: 40px;
+  }
+  h1 { font-size: 26px; letter-spacing: -0.02em; margin: 0 0 6px; }
+  .sub { color: #9a9a9a; font-size: 14px; margin: 0 0 32px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 1500px;
+  }
+  .card {
+    background: #000;
+    border: 1px solid #1d1d1d;
+    border-radius: 16px;
+    padding: 22px 22px 26px;
+  }
+  .card h2 { font-size: 18px; margin: 0 0 2px; letter-spacing: -0.01em; }
+  .card p.desc { color: #8f8f8f; font-size: 13px; margin: 0 0 16px; line-height: 1.45; }
+  .stage {
+    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 30px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+  }
+  .label { font-size: 12px; color: #6f6f6f; margin-top: 10px; }
+  svg { width: 100%; height: auto; max-width: 560px; overflow: visible; }
+</style>
+</head>
+<body>
+  <h1>WHAT WE DO — 무한대 메탈릭 시안 4종</h1>
+  <p class="sub">두 타원이 겹친 ∞ 라인을 메탈릭하게. 파란 점은 시안마다 다른 요소로 대체했습니다. (실제 섹션과 동일한 검정 배경)</p>
+  <div class="grid" id="grid"></div>
+
+<script>
+const CX = 270, CY = 150, RX = 255, RY = 72, ROT = 13;
+
+function pt(tDeg, rotDeg, rx = RX, ry = RY) {
+  const t = tDeg * Math.PI / 180, r = rotDeg * Math.PI / 180;
+  const lx = rx * Math.cos(t), ly = ry * Math.sin(t);
+  return [CX + lx * Math.cos(r) - ly * Math.sin(r), CY + lx * Math.sin(r) + ly * Math.cos(r)];
+}
+function poly(rotDeg, rx, ry, reverse) {
+  const pts = [];
+  for (let a = 0; a <= 360; a += 3) pts.push(pt(a, rotDeg, rx, ry));
+  if (reverse) pts.reverse();
+  return pts.map(p => p[0].toFixed(2) + ',' + p[1].toFixed(2)).join(' L');
+}
+// 메탈 밴드(도넛) 한 개: 바깥 타원 + 안쪽 타원(역방향) → fill-rule:evenodd 로 밴드
+function bandPath(rotDeg, w) {
+  const outer = poly(rotDeg, RX + w, RY + w, false);
+  const inner = poly(rotDeg, RX - w, RY - w, true);
+  return `M${outer} Z M${inner} Z`;
+}
+// 점이 따라갈 ∞ 경로(흰 라인 위): 우측 교차점에서 타원 A 한바퀴 → 타원 B 한바퀴
+function motionPath() {
+  const sample = (rot, t0) => {
+    let s = '';
+    for (let a = 0; a <= 360; a += 3) { const [x, y] = pt(t0 + a, rot); s += `${x.toFixed(2)},${y.toFixed(2)} `; }
+    return s.trim().split(' ');
+  };
+  const a = sample(ROT, -39.29), b = sample(-ROT, 39.29);
+  return `M${a[0]} L${[...a.slice(1), ...b].join(' L')} Z`;
+}
+
+const MOTION = motionPath();
+const W = 17; // 밴드 두께 (반)
+
+// 공통 메탈 밴드 svg 생성기. grad: defs 내용, opts: 추가 오버레이/무빙요소
+function metalSVG(id, gradDefs, extraDefs, ringStroke, mover) {
+  return `
+  <svg viewBox="0 0 540 300" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      ${gradDefs}
+      ${extraDefs || ''}
+      <path id="motion-${id}" d="${MOTION}" fill="none"/>
+      <filter id="lift-${id}" x="-20%" y="-40%" width="140%" height="180%">
+        <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity="0.55"/>
+      </filter>
+    </defs>
+    <g filter="url(#lift-${id})">
+      <path d="${bandPath(ROT, W)}" fill="url(#g-${id})" fill-rule="evenodd" ${ringStroke}/>
+      <path d="${bandPath(-ROT, W)}" fill="url(#g-${id})" fill-rule="evenodd" ${ringStroke}/>
+    </g>
+    ${mover}
+  </svg>`;
+}
+
+const concepts = [];
+
+// ── 시안 1: Polished Chrome + 흐르는 하이라이트(글린트) ──
+concepts.push({
+  title: "1. Polished Chrome · 흐르는 하이라이트",
+  desc: "정통 은빛 크롬. 점 대신 금속 표면을 스치는 빛 반사(글린트)가 라인을 따라 흐릅니다.",
+  label: "mover: 빛 반사 글린트 (soft glint)",
+  svg: metalSVG("c1",
+    `<linearGradient id="g-c1" x1="0" y1="0" x2="0" y2="1">
+       <stop offset="0%" stop-color="#ffffff"/>
+       <stop offset="22%" stop-color="#e2e2e2"/>
+       <stop offset="50%" stop-color="#8c8c8c"/>
+       <stop offset="66%" stop-color="#666666"/>
+       <stop offset="82%" stop-color="#c2c2c2"/>
+       <stop offset="100%" stop-color="#f4f4f4"/>
+     </linearGradient>
+     <radialGradient id="glint-c1" cx="50%" cy="50%" r="50%">
+       <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+     </radialGradient>`,
+    "",
+    `stroke="#ffffff" stroke-opacity="0.25" stroke-width="1"`,
+    `<g style="mix-blend-mode:screen">
+       <ellipse rx="26" ry="11" fill="url(#glint-c1)">
+         <animateMotion dur="6s" repeatCount="indefinite" rotate="auto"><mpath href="#motion-c1"/></animateMotion>
+       </ellipse>
+     </g>`)
+});
+
+// ── 시안 2: Brushed Titanium + 크롬 구슬 ──
+concepts.push({
+  title: "2. Brushed Titanium · 크롬 구슬",
+  desc: "차분한 티타늄 그레이. 점 대신 입체 크롬 구슬(베어링)이 라인을 굴러갑니다.",
+  label: "mover: 3D 크롬 스피어",
+  svg: metalSVG("c2",
+    `<linearGradient id="g-c2" x1="0" y1="0" x2="0.2" y2="1">
+       <stop offset="0%" stop-color="#f0f2f4"/>
+       <stop offset="30%" stop-color="#aab0b6"/>
+       <stop offset="55%" stop-color="#787f86"/>
+       <stop offset="78%" stop-color="#9aa0a6"/>
+       <stop offset="100%" stop-color="#dfe3e6"/>
+     </linearGradient>
+     <radialGradient id="ball-c2" cx="35%" cy="30%" r="70%">
+       <stop offset="0%" stop-color="#ffffff"/>
+       <stop offset="35%" stop-color="#d7dadd"/>
+       <stop offset="70%" stop-color="#7d8388"/>
+       <stop offset="100%" stop-color="#2f3338"/>
+     </radialGradient>`,
+    "",
+    `stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"`,
+    `<circle r="12" fill="url(#ball-c2)" stroke="#1c1f22" stroke-width="0.5">
+       <animateMotion dur="7s" repeatCount="indefinite"><mpath href="#motion-c2"/></animateMotion>
+     </circle>`)
+});
+
+// ── 시안 3: Liquid Silver + 코멧(혜성 꼬리) ──
+const cometDots = (n) => {
+  let s = '';
+  for (let i = 0; i < n; i++) {
+    const r = 7 - i * 1.1, op = 1 - i * 0.18, begin = (-i * 0.10).toFixed(2);
+    s += `<circle r="${r.toFixed(1)}" fill="#ffffff" opacity="${op.toFixed(2)}" filter="url(#blur-c3)">
+            <animateMotion dur="5s" begin="${begin}s" repeatCount="indefinite"><mpath href="#motion-c3"/></animateMotion>
+          </circle>`;
+  }
+  return s;
+};
+concepts.push({
+  title: "3. Liquid Silver · 코멧 트레일",
+  desc: "광택 대비가 강한 리퀴드 실버. 점 대신 꼬리를 남기며 흐르는 빛(혜성)이 흐릅니다.",
+  label: "mover: 코멧 + 페이드 트레일",
+  svg: metalSVG("c3",
+    `<linearGradient id="g-c3" x1="0" y1="0" x2="0" y2="1">
+       <stop offset="0%" stop-color="#ffffff"/>
+       <stop offset="15%" stop-color="#cdcdcd"/>
+       <stop offset="45%" stop-color="#5f5f5f"/>
+       <stop offset="55%" stop-color="#3a3a3a"/>
+       <stop offset="85%" stop-color="#b6b6b6"/>
+       <stop offset="100%" stop-color="#ffffff"/>
+     </linearGradient>`,
+    `<filter id="blur-c3" x="-100%" y="-100%" width="300%" height="300%">
+       <feGaussianBlur stdDeviation="1.4"/>
+     </filter>`,
+    `stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"`,
+    `<g style="mix-blend-mode:screen">${cometDots(6)}</g>`)
+});
+
+// ── 시안 4: Dark Gunmetal + 글로우 노드 ──
+concepts.push({
+  title: "4. Dark Gunmetal · 글로우 노드",
+  desc: "검정 위 다크 건메탈 + 림라이트. 점 대신 은은하게 맥동하는 빛 노드가 흐릅니다.",
+  label: "mover: 펄싱 글로우 노드",
+  svg: metalSVG("c4",
+    `<linearGradient id="g-c4" x1="0" y1="0" x2="0.1" y2="1">
+       <stop offset="0%" stop-color="#c9ced4"/>
+       <stop offset="28%" stop-color="#6b7178"/>
+       <stop offset="52%" stop-color="#2c3036"/>
+       <stop offset="74%" stop-color="#4a4f55"/>
+       <stop offset="100%" stop-color="#aeb4bb"/>
+     </linearGradient>`,
+    `<filter id="glow-c4" x="-150%" y="-150%" width="400%" height="400%">
+       <feGaussianBlur stdDeviation="4" result="b"/>
+       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+     </filter>`,
+    `stroke="#ffffff" stroke-opacity="0.22" stroke-width="1.2"`,
+    `<g filter="url(#glow-c4)">
+       <circle r="7" fill="#dff1ff">
+         <animate attributeName="r" values="5;8.5;5" dur="2.2s" repeatCount="indefinite"/>
+         <animate attributeName="opacity" values="0.65;1;0.65" dur="2.2s" repeatCount="indefinite"/>
+         <animateMotion dur="8s" repeatCount="indefinite"><mpath href="#motion-c4"/></animateMotion>
+       </circle>
+     </g>`)
+});
+
+document.getElementById('grid').innerHTML = concepts.map(c => `
+  <div class="card">
+    <h2>${c.title}</h2>
+    <p class="desc">${c.desc}</p>
+    <div class="stage">${c.svg}</div>
+    <div class="label">${c.label}</div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>

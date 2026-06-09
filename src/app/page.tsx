@@ -3,8 +3,8 @@ import Hero from "@/components/Hero";
 import WhoWeAre from "@/components/WhoWeAre";
 import WhatWeDo from "@/components/WhatWeDo";
 import HowWeDo from "@/components/HowWeDo";
+import Clients from "@/components/Clients";
 import Partners from "@/components/Partners";
-import Work from "@/components/Work";
 import Footer from "@/components/Footer";
 import { FadeUp } from "@/components/Reveal";
 
@@ -17,13 +17,13 @@ export default function Home() {
         <WhatWeDo />
       </FadeUp>
       <FadeUp>
-        <HowWeDo />
+        <Clients />
       </FadeUp>
       <FadeUp>
         <Partners />
       </FadeUp>
       <FadeUp>
-        <Work />
+        <HowWeDo />
       </FadeUp>
       <Footer />
     </ResponsiveCanvas>

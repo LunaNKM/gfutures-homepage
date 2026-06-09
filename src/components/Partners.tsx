@@ -1,45 +1,38 @@
-import { partnerLogos } from "@/lib/images";
+import Image from "next/image";
+import { partnerSectionLogos } from "@/lib/images";
 
-function Row({ reverse = false }: { reverse?: boolean }) {
-  const logos = [...partnerLogos, ...partnerLogos];
-  return (
-    <div className="flex w-max gap-[74px]" style={{ willChange: "transform" }}>
-      <div
-        className="flex gap-[74px]"
-        style={{
-          animation: `marquee ${reverse ? "64s" : "56s"} linear infinite`,
-          animationDirection: reverse ? "reverse" : "normal",
-        }}
-      >
-        {logos.map((src, i) => (
-          <div
-            key={i}
-            className="flex h-[69px] w-[208px] flex-none items-center justify-center"
-          >
-            <img
-              src={src}
-              alt=""
-              className="max-h-[50px] max-w-[180px] object-contain opacity-90"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+const partnersCopy =
+  "\ucd5c\uace0\uc758 \uace0\uac1d\uc0ac\uc640 \ucd5c\uace0\uc758 \ud30c\ud2b8\ub108\uac00 \ub9cc\ub098 \ucd5c\uace0\uc758 \uc131\uacfc\ub97c \ub9cc\ub4ed\ub2c8\ub2e4.";
 
 export default function Partners() {
   return (
-    <section className="w-[1440px] overflow-hidden bg-black py-[120px] text-white">
-      <h2 className="display text-center text-[85px] leading-none">
-        Partners &amp; Clients
+    <section className="w-screen bg-white px-6 py-[96px] text-black md:h-[606px] md:w-[1440px] md:px-0 md:py-0">
+      <h2 className="display text-center text-[48px] leading-none md:pt-[129px] md:text-[85px]">
+        Our Partners
       </h2>
-      <p className="mt-8 text-center text-2xl font-medium capitalize">
-        최고의 고객사와 최고의 파트너가 만나 최고의 성과를 만듭니다.
+      <p className="mx-auto mt-7 max-w-[585px] text-center text-[17px] font-medium leading-[1.5] tracking-[-0.01em] md:mt-[42px] md:text-[24px]">
+        {partnersCopy}
       </p>
-      <div className="mt-16 flex flex-col gap-10">
-        <Row />
-        <Row reverse />
+      <div className="mx-auto mt-16 flex max-w-[1220px] flex-wrap items-center justify-center gap-x-[34px] gap-y-8 md:mt-[78px] md:flex-nowrap md:gap-x-[34px]">
+        {partnerSectionLogos.map((logo) => (
+          <div
+            key={logo.label}
+            className="relative flex h-[72px] flex-none items-center justify-center md:h-[124px]"
+            style={{
+              width: `clamp(${Math.round(logo.width * 0.5)}px, ${
+                logo.width * 0.13
+              }vw, ${logo.width}px)`,
+            }}
+          >
+            <Image
+              src={logo.src}
+              alt={logo.label}
+              fill
+              sizes={`${logo.width}px`}
+              className="object-contain"
+            />
+          </div>
+        ))}
       </div>
     </section>
   );

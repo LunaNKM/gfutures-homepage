@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WHAT WE DO — 고정 3D 리본 + 순환 소재 시안</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background:#0e0e0f; color:#fff; font-family:"Helvetica Neue",Arial,"Apple SD Gothic Neo",sans-serif; padding:36px; }
+  h1 { font-size:24px; letter-spacing:-0.02em; }
+  .sub { color:#9a9a9a; font-size:14px; margin:6px 0 28px; }
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; max-width:1300px; }
+  .card { border:1px solid #232325; border-radius:16px; overflow:hidden; }
+  .card h2 { font-size:17px; margin:16px 18px 2px; }
+  .card p.d { color:#8f8f8f; font-size:12.5px; margin:0 18px 12px; line-height:1.45; }
+  .stage { position:relative; aspect-ratio:16/10; }
+  canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .lab { font-size:11px; color:#6f6f7a; margin:0 18px 16px; }
+  /* 배경/그라운드 */
+  .bg-studio { background:radial-gradient(120% 90% at 50% 28%, #fafbfc 0%, #e7eaee 55%, #d3d7dd 100%); }
+  .bg-dark   { background:radial-gradient(120% 90% at 50% 30%, #2a2d33 0%, #15171b 60%, #0c0d10 100%); }
+  .bg-cream  { background:radial-gradient(120% 90% at 50% 30%, #f7f2ea 0%, #ece3d5 60%, #ddd2c0 100%); }
+</style>
+</head>
+<body>
+  <h1>WHAT WE DO — 고정 3D 리본 + 순환 소재</h1>
+  <p class="sub">모델(실버 크롬 리본)은 사진처럼 <b>고정</b>. 그 표면을 따라 다른 소재(빛·에너지)가 <b>순환</b>합니다. 4가지 순환 소재 시안.</p>
+  <div class="grid" id="grid"></div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+// ── 베르누이 렘니스케이트(∞) 곡선 ──
+class Lemniscate extends THREE.Curve {
+  constructor(a = 2.3) { super(); this.a = a; }
+  getPoint(u, t = new THREE.Vector3()) {
+    const ang = u * Math.PI * 2;
+    const s = Math.sin(ang), c = Math.cos(ang), d = 1 + s * s;
+    return t.set((this.a * c) / d, (this.a * s * c) / d, 0);
+  }
+}
+
+// ── 꼬인 납작 단면을 경로로 스윕한 리본 지오메트리 ──
+function buildRibbon(curve, N = 520, M = 28, W = 0.95, T = 0.14, twistTurns = 1) {
+  const pos = [], nor = [], uv = [], idx = [];
+  const up = new THREE.Vector3(0, 0, 1);
+  for (let i = 0; i <= N; i++) {
+    const u = i / N;
+    const p = curve.getPoint(u % 1);
+    const tan = curve.getTangent(u % 1).normalize();
+    let side = new THREE.Vector3().crossVectors(tan, up);
+    if (side.lengthSq() < 1e-6) side.set(1, 0, 0);
+    side.normalize();
+    const bn = new THREE.Vector3().crossVectors(side, tan).normalize();
+    const tw = u * twistTurns * Math.PI * 2;
+    const ca = Math.cos(tw), sa = Math.sin(tw);
+    const ax = side.clone().multiplyScalar(ca).addScaledVector(bn, sa);   // 폭 축
+    const ay = side.clone().multiplyScalar(-sa).addScaledVector(bn, ca);  // 두께 축
+    for (let j = 0; j <= M; j++) {
+      const a = (j / M) * Math.PI * 2;
+      const cx = Math.cos(a), sy = Math.sin(a);
+      const v = p.clone().addScaledVector(ax, cx * W * 0.5).addScaledVector(ay, sy * T * 0.5);
+      const n = ax.clone().multiplyScalar(cx / (W * 0.5)).addScaledVector(ay, sy / (T * 0.5)).normalize();
+      pos.push(v.x, v.y, v.z); nor.push(n.x, n.y, n.z); uv.push(u, j / M);
+    }
+  }
+  const cols = M + 1;
+  for (let i = 0; i < N; i++) for (let j = 0; j < M; j++) {
+    const a = i * cols + j, b = a + 1, c = a + cols, d = c + 1;
+    idx.push(a, c, b, b, c, d);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3));
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  return g;
+}
+
+const curve = new Lemniscate(2.3);
+const ribbonGeo = buildRibbon(curve);
+
+// 순환 소재(빛) 셰이더 — uv.x(길이방향)를 따라 밴드가 흐름
+function flowMaterial(color, opts = {}) {
+  const { headSharp = false, intensity = 1.0, width = 0.10 } = opts;
+  return new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide,
+    uniforms: { uTime: { value: 0 }, uColor: { value: new THREE.Color(color) },
+                uInt: { value: intensity }, uW: { value: width }, uHead: { value: headSharp ? 1 : 0 } },
+    vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);} `,
+    fragmentShader: `
+      varying vec2 vUv; uniform float uTime,uInt,uW,uHead; uniform vec3 uColor;
+      void main(){
+        float x = fract(vUv.x - uTime);
+        float band;
+        if(uHead>0.5){ // 코멧: 앞은 날카롭고 뒤로 긴 꼬리
+          float head = smoothstep(0.0,0.012,x)*(1.0-smoothstep(0.012,0.03,x));
+          float tail = (1.0-smoothstep(0.0,0.28,x))*0.5;
+          band = max(head, tail);
+        } else {
+          band = smoothstep(0.0,uW*0.5,x)*(1.0-smoothstep(uW*0.5,uW,x));
+        }
+        gl_FragColor = vec4(uColor*uInt, band);
+      }`,
+  });
+}
+
+const CFG = {
+  c1: { bg:"bg-studio", metal:0xffffff, rough:0.06, flow:0xffffff, flowOpts:{intensity:1.6, width:0.08},
+        title:"1. Liquid Chrome · 화이트 글린트", desc:"사진과 가장 가까운 미러 크롬. 표면을 스치는 흰 빛이 ∞ 라인을 따라 순환.", lab:"순환: 화이트 라이트 스트릭" },
+  c2: { bg:"bg-dark", metal:0xcfd3d8, rough:0.12, flow:0x39b6ff, flowOpts:{intensity:1.3, width:0.12},
+        title:"2. Steel · 시안 에너지", desc:"다크 배경 + 스틸 크롬. 브랜드 블루 에너지가 표면을 타고 흐름.", lab:"순환: 시안/블루 에너지 펄스" },
+  c3: { bg:"bg-cream", metal:0xfff4dc, rough:0.10, flow:0xffd27a, flowOpts:{intensity:1.4, width:0.10},
+        title:"3. Champagne · 골드 플로우", desc:"웜 샴페인 골드 메탈 위로 따뜻한 골드 라이트가 순환. 럭셔리 톤.", lab:"순환: 골드 라이트 플로우" },
+  c4: { bg:"bg-dark", metal:0xffffff, rough:0.05, flow:0xffffff, flowOpts:{headSharp:true, intensity:1.8},
+        title:"4. Chrome · 코멧", desc:"미러 크롬 + 앞은 날카롭고 뒤로 꼬리를 끄는 빛(혜성)이 가속하듯 순환.", lab:"순환: 코멧(헤드+테일)" },
+};
+
+const updaters = [];
+
+function makeScene(canvas, cfg) {
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, preserveDrawingBuffer:true });
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+
+  const scene = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+  const cam = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+  cam.position.set(0, 0, 5.4);
+
+  // 고정 자세 (사진처럼 비스듬한 입체감) — 회전 없음
+  const group = new THREE.Group();
+  group.rotation.set(-0.38, 0.55, 0.06);
+  scene.add(group);
+
+  const metal = new THREE.MeshPhysicalMaterial({
+    color: cfg.metal, metalness: 1.0, roughness: cfg.rough,
+    envMapIntensity: 1.5, clearcoat: 0.6, clearcoatRoughness: 0.15, side: THREE.DoubleSide,
+  });
+  group.add(new THREE.Mesh(ribbonGeo, metal));
+
+  // 순환 소재(빛) — 동일 지오메트리를 살짝 키워 표면 위에 얹음
+  const flowMat = flowMaterial(cfg.flow, cfg.flowOpts);
+  const flow = new THREE.Mesh(ribbonGeo, flowMat);
+  flow.scale.setScalar(1.012);
+  group.add(flow);
+
+  const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(2, 4, 5); scene.add(key);
+
+  function resize(){ const w=canvas.clientWidth,h=canvas.clientHeight; if(!w||!h)return;
+    renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix(); renderer.render(scene,cam); }
+  new ResizeObserver(resize).observe(canvas); resize(); renderer.render(scene,cam);
+
+  updaters.push(() => { flowMat.uniforms.uTime.value = (performance.now()/1000) * 0.22 % 1; renderer.render(scene,cam); });
+}
+
+document.getElementById("grid").innerHTML = Object.entries(CFG).map(([k,c]) => `
+  <div class="card">
+    <h2>${c.title}</h2><p class="d">${c.desc}</p>
+    <div class="stage ${c.bg}"><canvas data-k="${k}"></canvas></div>
+    <div class="lab">${c.lab}</div>
+  </div>`).join("");
+
+document.querySelectorAll("canvas[data-k]").forEach(c => makeScene(c, CFG[c.dataset.k]));
+
+function loop(){ for(const u of updaters) u(); requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+setInterval(()=>{ if(document.hidden) for(const u of updaters) u(); }, 120);
+</script>
+</body>
+</html>

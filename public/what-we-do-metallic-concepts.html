@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>What We Do Metallic Infinity Model</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --paper: #f7f7f2;
+    --muted: rgba(247, 247, 242, 0.64);
+    --line: rgba(247, 247, 242, 0.82);
+  }
+
+  * { box-sizing: border-box; }
+
+  html,
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: #050505;
+    color: var(--paper);
+    font-family: "Helvetica Neue", Arial, "Apple SD Gothic Neo", sans-serif;
+  }
+
+  body {
+    display: grid;
+    place-items: start center;
+    padding: 42px 28px;
+  }
+
+  .page {
+    width: min(100%, 1440px);
+  }
+
+  .head {
+    margin-bottom: 34px;
+    text-align: center;
+  }
+
+  .head h1 {
+    margin: 0;
+    font-size: clamp(52px, 6.8vw, 96px);
+    line-height: 0.88;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: 560;
+  }
+
+  .head p {
+    max-width: 920px;
+    margin: 24px auto 0;
+    color: var(--muted);
+    font-size: clamp(16px, 1.55vw, 24px);
+    line-height: 1.55;
+    font-weight: 500;
+    word-break: keep-all;
+  }
+
+  .stage {
+    position: relative;
+    height: min(58vw, 650px);
+    min-height: 520px;
+    overflow: hidden;
+    border: 3px solid var(--line);
+    background:
+      radial-gradient(circle at 50% 36%, rgba(95, 100, 106, 0.35), transparent 42%),
+      linear-gradient(180deg, #17191c 0%, #0b0c0e 54%, #050505 100%);
+    isolation: isolate;
+  }
+
+  .stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,0.08), transparent 18%, transparent 82%, rgba(255,255,255,0.07)),
+      linear-gradient(180deg, rgba(255,255,255,0.08), transparent 24%, transparent 80%, rgba(255,255,255,0.05));
+    opacity: 0.55;
+  }
+
+  .stage canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .corner {
+    position: absolute;
+    z-index: 3;
+    color: rgba(247, 247, 242, 0.9);
+    font-size: clamp(24px, 3vw, 42px);
+    line-height: 0.94;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: 560;
+    pointer-events: none;
+  }
+
+  .corner.tl { left: 44px; top: 42px; }
+  .corner.tr { right: 44px; top: 42px; text-align: right; }
+  .corner.bl { left: 44px; bottom: 42px; }
+  .corner.br { right: 44px; bottom: 42px; text-align: right; }
+
+  .loading {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    color: rgba(247, 247, 242, 0.44);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .ready .loading { display: none; }
+
+  .caption {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 18px;
+    color: rgba(247, 247, 242, 0.46);
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 760px) {
+    body { padding: 24px 16px; }
+
+    .head {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .head p {
+      margin-left: 0;
+      margin-right: 0;
+      font-size: 15px;
+    }
+
+    .stage {
+      height: 620px;
+      min-height: 620px;
+    }
+
+    .corner {
+      font-size: 24px;
+    }
+
+    .corner.tl { left: 22px; top: 24px; }
+    .corner.tr { right: 22px; top: 24px; }
+    .corner.bl { left: 22px; bottom: 24px; }
+    .corner.br { right: 22px; bottom: 24px; }
+
+    .caption {
+      display: block;
+    }
+
+    .caption span {
+      display: block;
+      margin-top: 8px;
+    }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <header class="head">
+      <h1>What We Do</h1>
+      <p>브랜딩의 네 지점이 하나의 루프로 연결되는 장면. 중앙에는 사진 레퍼런스처럼 두툼하고 매끈한 3D 메탈릭 무한대 오브제가 놓입니다.</p>
+    </header>
+
+    <section class="stage" id="stage">
+      <div class="loading">rendering metallic infinity</div>
+      <canvas aria-label="Thick metallic infinity object"></canvas>
+      <span class="corner tl">Branding</span>
+      <span class="corner tr">Branding</span>
+      <span class="corner bl">Branding</span>
+      <span class="corner br">Branding</span>
+    </section>
+
+    <div class="caption">
+      <span>Full replacement study / no legacy ellipse stroke</span>
+      <span>Thick chrome ribbon / studio lighting / grounded shadow</span>
+    </div>
+  </main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+const TAU = Math.PI * 2;
+const stage = document.getElementById("stage");
+const canvas = stage.querySelector("canvas");
+
+function curvePoint(u) {
+  const t = u * TAU;
+  return new THREE.Vector3(
+    2.42 * Math.sin(t),
+    0.9 * Math.sin(2 * t),
+    0.28 * Math.cos(t)
+  );
+}
+
+function curveTangent(u) {
+  const e = 0.0015;
+  return curvePoint((u + e) % 1).sub(curvePoint((u - e + 1) % 1)).normalize();
+}
+
+function buildInfinityRibbon() {
+  const segments = 760;
+  const radial = 38;
+  const width = 0.84;
+  const thickness = 0.24;
+  const positions = [];
+  const normals = [];
+  const uvs = [];
+  const indices = [];
+  const worldUp = new THREE.Vector3(0, 0, 1);
+
+  for (let i = 0; i <= segments; i++) {
+    const u = i / segments;
+    const p = curvePoint(u);
+    const tangent = curveTangent(u);
+    let side = new THREE.Vector3().crossVectors(worldUp, tangent);
+    if (side.lengthSq() < 0.00001) side.set(1, 0, 0);
+    side.normalize();
+    const binormal = new THREE.Vector3().crossVectors(tangent, side).normalize();
+
+    const twistAngle = (u * 0.98 + 0.055 * Math.sin(u * TAU * 2)) * TAU;
+    const cos = Math.cos(twistAngle);
+    const sin = Math.sin(twistAngle);
+    const axisA = side.clone().multiplyScalar(cos).addScaledVector(binormal, sin).normalize();
+    const axisB = side.clone().multiplyScalar(-sin).addScaledVector(binormal, cos).normalize();
+
+    for (let j = 0; j <= radial; j++) {
+      const a = (j / radial) * TAU;
+      const ca = Math.cos(a);
+      const sa = Math.sin(a);
+      const px = ca * width * 0.5;
+      const py = sa * thickness * 0.5;
+      const v = p.clone().addScaledVector(axisA, px).addScaledVector(axisB, py);
+      const n = axisA.clone().multiplyScalar(ca / width).addScaledVector(axisB, sa / thickness).normalize();
+      positions.push(v.x, v.y, v.z);
+      normals.push(n.x, n.y, n.z);
+      uvs.push(u, j / radial);
+    }
+  }
+
+  const columns = radial + 1;
+  for (let i = 0; i < segments; i++) {
+    for (let j = 0; j < radial; j++) {
+      const a = i * columns + j;
+      const b = a + 1;
+      const c = a + columns;
+      const d = c + 1;
+      indices.push(a, c, b, b, c, d);
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute("normal", new THREE.Float32BufferAttribute(normals, 3));
+  geometry.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
+  geometry.setIndex(indices);
+  geometry.computeBoundingSphere();
+  return geometry;
+}
+
+function makeShadowTexture() {
+  const c = document.createElement("canvas");
+  c.width = 640;
+  c.height = 260;
+  const ctx = c.getContext("2d");
+  const g = ctx.createRadialGradient(320, 130, 20, 320, 130, 310);
+  g.addColorStop(0, "rgba(0,0,0,0.46)");
+  g.addColorStop(0.42, "rgba(0,0,0,0.2)");
+  g.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, c.width, c.height);
+  const texture = new THREE.CanvasTexture(c);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
+function makeGlintMaterial() {
+  return new THREE.ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide,
+    uniforms: {
+      uTime: { value: 0 },
+      uColor: { value: new THREE.Color(0xffffff) }
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec2 vUv;
+      uniform float uTime;
+      uniform vec3 uColor;
+      void main() {
+        float x = fract(vUv.x - uTime);
+        float band = smoothstep(0.0, 0.014, x) * (1.0 - smoothstep(0.014, 0.09, x));
+        float center = smoothstep(0.12, 0.5, vUv.y) * (1.0 - smoothstep(0.5, 0.88, vUv.y));
+        gl_FragColor = vec4(uColor * 1.65, band * center);
+      }
+    `
+  });
+}
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: true,
+  powerPreference: "high-performance"
+});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.08;
+renderer.shadowMap.enabled = true;
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.05).texture;
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x111820, 1.35));
+
+const key = new THREE.DirectionalLight(0xffffff, 3.65);
+key.position.set(-3.6, 4.2, 4.8);
+scene.add(key);
+
+const rim = new THREE.DirectionalLight(0xbfd8ff, 2.25);
+rim.position.set(4.3, 1.7, 4.1);
+scene.add(rim);
+
+const low = new THREE.DirectionalLight(0xffffff, 0.95);
+low.position.set(0, -2.4, 5.2);
+scene.add(low);
+
+const camera = new THREE.PerspectiveCamera(31, 1, 0.1, 100);
+camera.position.set(0, 0.32, 11.25);
+camera.lookAt(0, -0.1, 0);
+
+const group = new THREE.Group();
+group.rotation.set(-0.22, -0.17, 0.015);
+group.position.set(0, -0.13, 0);
+scene.add(group);
+
+const geometry = buildInfinityRibbon();
+const metal = new THREE.MeshPhysicalMaterial({
+  color: 0xf7f8f6,
+  metalness: 1,
+  roughness: 0.065,
+  clearcoat: 1,
+  clearcoatRoughness: 0.08,
+  envMapIntensity: 2.4
+});
+const ribbon = new THREE.Mesh(geometry, metal);
+ribbon.castShadow = true;
+ribbon.receiveShadow = true;
+group.add(ribbon);
+
+const darkRim = new THREE.Mesh(
+  geometry,
+  new THREE.MeshPhysicalMaterial({
+    color: 0x9da4aa,
+    metalness: 1,
+    roughness: 0.22,
+    transparent: true,
+    opacity: 0.22,
+    side: THREE.BackSide,
+    envMapIntensity: 1.0
+  })
+);
+darkRim.scale.setScalar(1.028);
+group.add(darkRim);
+
+const glintMaterial = makeGlintMaterial();
+const glint = new THREE.Mesh(geometry, glintMaterial);
+glint.scale.setScalar(1.014);
+group.add(glint);
+
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(13, 7),
+  new THREE.MeshStandardMaterial({
+    color: 0x37393b,
+    roughness: 0.44,
+    metalness: 0,
+    transparent: true,
+    opacity: 0.42
+  })
+);
+floor.rotation.x = -Math.PI / 2;
+floor.position.set(0, -1.18, 0.3);
+scene.add(floor);
+
+const shadow = new THREE.Mesh(
+  new THREE.PlaneGeometry(6.5, 1.55),
+  new THREE.MeshBasicMaterial({
+    map: makeShadowTexture(),
+    transparent: true,
+    depthWrite: false
+  })
+);
+shadow.rotation.x = -Math.PI / 2;
+shadow.position.set(0, -1.305, 0.22);
+scene.add(shadow);
+
+function resize() {
+  const width = Math.max(1, canvas.clientWidth);
+  const height = Math.max(1, canvas.clientHeight);
+  renderer.setSize(width, height, false);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  const narrow = width < 720;
+  camera.position.z = narrow ? 11.25 : 9.95;
+  group.scale.setScalar(narrow ? 1.04 : 1.1);
+}
+
+new ResizeObserver(resize).observe(stage);
+resize();
+stage.classList.add("ready");
+
+function tick(time) {
+  const t = time * 0.001;
+  group.rotation.y = -0.17 + Math.sin(t * 0.38) * 0.026;
+  group.rotation.x = -0.22 + Math.sin(t * 0.31) * 0.01;
+  glintMaterial.uniforms.uTime.value = (t * 0.16) % 1;
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>

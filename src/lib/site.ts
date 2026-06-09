@@ -10,11 +10,10 @@ export const company = {
   nameKo: "지퓨처스",
   nameEn: "Gfutures",
   email: "admin@gfutures.co",
-  address: "서울특별시 마포구 영화로 113, 순흥빌딩 3층",
+  address: "서울특별시 마포구 독막로 18, 팍스타빌딩 5층",
   bizNo: "사업자 등록번호 696-88-01813",
   copyright: "Copyright © 2025 지퓨처스 All rights reserved",
-  footerCopy:
-    "GFS is a company preparing for the global future, continuously pursuing diverse and creative challenges. Becoming the world’s No.1 partner — that is GFS’s dream and ultimate goal.",
+  footerCopy: "Global No.1 Strategic Partner,",
 };
 
 export const stats = [
@@ -27,12 +26,12 @@ export const stats = [
 export const howWeDoSteps = [
   "고객 필요 사항 청취",
   "글로벌 전략 방안 제안",
-  "계약 체결 및 예산 확정",
-  "고객 전담팀 구성",
-  "세부 전략 및 실무 착수",
-  "상시 중간 보고",
-  "업무 종료 후 결과 보고",
-  "후속 진행 전략 제안",
+  "캠페인 목표 및 예산 확정",
+  "전담 운영팀 구성",
+  "채널별 실행 플랜 수립",
+  "콘텐츠 제작 및 광고 집행",
+  "성과 데이터 분석 리포트",
+  "후속 성장 전략 제안",
 ];
 
 export const whatWeDo = [
