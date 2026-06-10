@@ -10,7 +10,7 @@ export const company = {
   nameKo: "지퓨처스",
   nameEn: "Gfutures",
   email: "admin@gfutures.co",
-  address: "서울특별시 마포구 망원로 113, 순흥빌딩 3층",
+  address: "서울특별시 마포구 독막로 18, 팍스타빌딩 5층",
   bizNo: "사업자 등록번호 696-88-01813",
   copyright: "Copyright © 2025 지퓨처스 All rights reserved",
   footerCopy:
