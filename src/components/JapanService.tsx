@@ -1,8 +1,7 @@
 import { japanAccountCards, japanAccountIcons } from "@/lib/images";
 import ScrollReveal from "./ScrollReveal";
 import InfluencerCarousel from "./InfluencerCarousel";
-
-const moreCategories = ["POP UP", "Offline", "IP·Media", "OOH"];
+import JapanServiceMenu from "./JapanServiceMenu";
 
 // Figma node 320:669 — Service(JAPAN) 본문. 1440px 캔버스 기준이며
 // FitWidth(zoom)로 화면 폭에 맞춰 유동적으로 축소된다.
@@ -37,49 +36,6 @@ function AccordionRow({
     </div>
   );
 }
-
-const menuRows = [
-  {
-    title: "popup",
-    sub: "계정 운영 대행",
-    href: "#jp-account",
-    top: 100,
-    height: 136,
-    titleTop: 10,
-    subTop: 81,
-    arrowTop: 51,
-  },
-  {
-    title: "Influencer Marketing",
-    sub: "인플루언서 전략 제안",
-    href: "#jp-influencer",
-    top: 236,
-    height: 173,
-    titleTop: 46,
-    subTop: 112,
-    arrowTop: 22,
-  },
-  {
-    title: "Performance Marketing",
-    sub: "퍼포먼스 마케팅",
-    href: "#jp-performance",
-    top: 409,
-    height: 168,
-    titleTop: 39,
-    subTop: 109,
-    arrowTop: 74,
-  },
-  {
-    title: "& More",
-    sub: "일본 현지 네트워킹 바탕 일본 전략 수립",
-    href: "/japan/more",
-    top: 577,
-    height: 173,
-    titleTop: 38,
-    subTop: 112,
-    arrowTop: 74,
-  },
-];
 
 export default function JapanService() {
   return (
@@ -188,91 +144,8 @@ export default function JapanService() {
         </div>
       </ScrollReveal>
 
-      {/* ── 하단 서비스 메뉴 (black, h=890) ── */}
-      <ScrollReveal
-        as="div"
-        className="relative h-[890px] w-full overflow-hidden bg-black"
-      >
-        <div id="jp-more" className="absolute top-[-88px]" />
-        {menuRows.map((row) =>
-          row.title === "& More" ? (
-            // & More — 클릭이 아니라 hover 시 하위 항목(카테고리)이 펼쳐진다.
-            <div
-              key={row.title}
-              className="group absolute left-0 w-full"
-              style={{ top: row.top, height: row.height }}
-            >
-              <span
-                className="absolute left-[111px] text-[23px] font-medium leading-[34px] text-white transition-opacity duration-300 group-hover:opacity-0"
-                style={{ top: row.subTop }}
-              >
-                {row.sub}
-              </span>
-              <span
-                className="display absolute left-[111px] text-[49px] leading-none text-white"
-                style={{ top: row.titleTop }}
-              >
-                {row.title}
-              </span>
-              <span
-                className="absolute left-[1316px] text-[30px] leading-none text-white transition-transform duration-300 group-hover:rotate-90"
-                style={{ top: row.arrowTop }}
-              >
-                ↗
-              </span>
-              {/* hover 시 펼쳐지는 하위 항목 */}
-              <div
-                className="absolute left-[470px] flex h-[44px] translate-x-3 items-center gap-[14px] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-                style={{ top: row.titleTop + 4 }}
-              >
-                {moreCategories.map((c) => (
-                  <a
-                    key={c}
-                    href="/japan/more"
-                    className="rounded-full border border-white/55 px-5 py-2 text-[18px] font-medium text-white transition-colors hover:bg-white hover:text-black"
-                  >
-                    {c}
-                  </a>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <a
-              key={row.title}
-              href={row.href}
-              className="group absolute left-0 block w-full transition-colors duration-300 hover:bg-white"
-              style={{ top: row.top, height: row.height }}
-            >
-              <span
-                className="absolute left-[111px] text-[23px] font-medium leading-[34px] text-white transition-colors duration-300 group-hover:text-black"
-                style={{ top: row.subTop }}
-              >
-                {row.sub}
-              </span>
-              <span
-                className="display absolute left-[111px] text-[49px] leading-none text-white transition-colors duration-300 group-hover:text-black"
-                style={{ top: row.titleTop }}
-              >
-                {row.title}
-              </span>
-              <span
-                className="absolute left-[1316px] text-[30px] leading-none text-white transition-colors duration-300 group-hover:text-black"
-                style={{ top: row.arrowTop }}
-              >
-                ↗
-              </span>
-            </a>
-          )
-        )}
-        {/* 구분선 */}
-        {[236, 409, 577, 750].map((t) => (
-          <span
-            key={t}
-            className="absolute left-[78px] h-px w-[1285px] bg-white/30"
-            style={{ top: t }}
-          />
-        ))}
-      </ScrollReveal>
+      {/* ── 하단 서비스 메뉴 + & More 펼침 ── */}
+      <JapanServiceMenu />
     </section>
   );
 }
