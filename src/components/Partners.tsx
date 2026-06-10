@@ -6,7 +6,7 @@ const partnersCopy =
 
 export default function Partners() {
   return (
-    <section className="w-screen bg-white px-6 py-[96px] text-black md:h-[606px] md:w-[1440px] md:px-0 md:py-0">
+    <section className="w-full bg-white px-6 py-[96px] text-black md:h-[606px] md:px-0 md:py-0">
       <h2 className="display text-center text-[48px] leading-none md:pt-[129px] md:text-[85px]">
         Our Partners
       </h2>

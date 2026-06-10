@@ -3,18 +3,16 @@
 import { useState } from "react";
 import { howWeDoSteps } from "@/lib/site";
 
-const howWeDoCopy =
-  "\uae00\ub85c\ubc8c \uc9c4\ucd9c\uc5d0 \ud544\uc694\ud55c \uc804\ub7b5\ubd80\ud130 \uc2e4\ud589, \uc131\uacfc \ubd84\uc11d\uae4c\uc9c0 \ud558\ub098\uc758 \ud750\ub984\uc73c\ub85c \uc124\uacc4\ud569\ub2c8\ub2e4.";
-
 export default function HowWeDo() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="w-screen bg-white px-6 py-[92px] text-black md:h-[854px] md:w-[1440px] md:px-0 md:py-0">
-      <h2 className="display text-[48px] leading-none md:ml-[176px] md:pt-[164px] md:text-[65.5px]">
-        How We Do
-      </h2>
-      <div className="mt-12 flex h-[360px] w-full gap-[1px] md:ml-[176px] md:mt-[73px] md:h-[308px] md:w-[1048px]">
+    <section className="w-full bg-white px-6 py-[92px] text-black md:h-[720px] md:px-0 md:py-0">
+      <div className="mx-auto max-w-[1088px]">
+        <h2 className="display text-[48px] leading-none md:pt-[128px] md:text-[65.5px]">
+          How We Do
+        </h2>
+        <div className="mt-12 flex h-[360px] w-full gap-[1px] md:mt-[73px] md:h-[308px]">
         {howWeDoSteps.map((step, i) => {
           const open = active === i;
           return (
@@ -46,10 +44,8 @@ export default function HowWeDo() {
             </div>
           );
         })}
+        </div>
       </div>
-      <p className="mt-8 max-w-[720px] text-[17px] font-medium leading-[1.5] tracking-[-0.01em] text-black/70 md:ml-[176px] md:mt-10 md:text-[20px]">
-        {howWeDoCopy}
-      </p>
     </section>
   );
 }

@@ -17,13 +17,13 @@ export default function Home() {
         <WhatWeDo />
       </FadeUp>
       <FadeUp>
+        <HowWeDo />
+      </FadeUp>
+      <FadeUp>
         <Clients />
       </FadeUp>
       <FadeUp>
         <Partners />
-      </FadeUp>
-      <FadeUp>
-        <HowWeDo />
       </FadeUp>
       <Footer />
     </ResponsiveCanvas>

@@ -18,7 +18,7 @@ function ClientMarqueeRow({
   const repeated = [...logos, ...logos];
 
   return (
-    <div className="h-[170px] overflow-hidden bg-black md:h-[305px]">
+    <div className="h-[96px] overflow-hidden bg-black md:h-[112px]">
       <div
         className="flex h-full w-max items-center gap-[42px] md:gap-[52px]"
         style={{
@@ -53,8 +53,8 @@ function ClientMarqueeRow({
 
 export default function Clients() {
   return (
-    <section className="w-screen bg-black text-white md:w-[1440px]">
-      <div className="flex min-h-[430px] flex-col items-center justify-start px-6 pt-[108px] text-center md:h-[820px] md:pt-[172px]">
+    <section className="w-full bg-black text-white">
+      <div className="flex flex-col items-center px-6 pb-[72px] pt-[108px] text-center md:pb-[92px] md:pt-[172px]">
         <h2 className="display text-[48px] leading-none md:text-[85px]">
           Our Clients
         </h2>
@@ -62,8 +62,10 @@ export default function Clients() {
           {clientsCopy}
         </p>
       </div>
-      <ClientMarqueeRow logos={clientLogoRows[0]} duration={112} />
-      <ClientMarqueeRow logos={clientLogoRows[1]} reverse duration={128} />
+      <div className="flex flex-col gap-[72px] pb-[120px] md:gap-[92px] md:pb-[164px]">
+        <ClientMarqueeRow logos={clientLogoRows[0]} duration={112} />
+        <ClientMarqueeRow logos={clientLogoRows[1]} reverse duration={128} />
+      </div>
     </section>
   );
 }

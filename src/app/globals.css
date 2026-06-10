@@ -34,9 +34,9 @@ body {
 
 /* 디자인이 1440px 고정폭이므로, 그보다 좁은 화면에서는 가로 스크롤 대신 축소 */
 .canvas {
-  width: 1440px;
-  margin-inline: auto;
-  transform-origin: top center;
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 .display {

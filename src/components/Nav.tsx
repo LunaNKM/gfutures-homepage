@@ -6,7 +6,7 @@ export default function Nav({ dark = false }: { dark?: boolean }) {
   const border = dark ? "border-black" : "border-white";
   return (
     <div
-      className={`absolute left-1/2 top-3 z-30 flex h-[38px] w-[1400px] -translate-x-1/2 items-center justify-between ${color}`}
+      className={`absolute left-1/2 top-3 z-30 flex h-[38px] w-[calc(100%-40px)] max-w-[1400px] -translate-x-1/2 items-center justify-between ${color}`}
     >
       <Link
         href="/"
@@ -14,7 +14,7 @@ export default function Nav({ dark = false }: { dark?: boolean }) {
       >
         Gfutures
       </Link>
-      <nav className="flex items-center gap-1">
+      <nav className="hidden items-center gap-1 md:flex">
         {NAV.map((item) => (
           <Link
             key={item.label}
