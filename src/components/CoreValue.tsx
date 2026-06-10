@@ -8,26 +8,31 @@ const values = [
   {
     letter: "G",
     title: "Grow Together",
+    lines: ["Grow", "Together"],
     desc: "나 혼자가 아닌 동료, 고객, 파트너와 함께 성장하고 도전합니다.",
   },
   {
     letter: "O",
     title: "Own the Result",
+    lines: ["Own the", "Result"],
     desc: "결과를 책임지는 자세, 선택이 아닌 필수입니다.",
   },
   {
     letter: "A",
     title: "Act Proactively",
+    lines: ["Act", "Proactively"],
     desc: "주도적인 생각은 기회를 만들고, 적극적인 실천은 결과를 만듭니다.",
   },
   {
     letter: "T",
     title: "Think Like A Partner",
+    lines: ["Think Like", "A Partner"],
     desc: "내 브랜드, 내 회사라면 어떻게 할지 고민하고 접근합니다.",
   },
   {
     letter: "S",
     title: "Stay Creative, Stay Curious",
+    lines: ["Stay Creative,", "Stay Curious"],
     desc: "세상의 모든 성공은 왜(why?)라는 작은 질문에서 시작됩니다.",
   },
 ];
@@ -48,8 +53,6 @@ export default function CoreValue() {
         {values.map((value, index) => {
           const img = goats[index];
           const isActive = active === index;
-          const firstWord = value.title.split(" ")[0];
-          const restWords = value.title.slice(firstWord.length).trim();
 
           return (
             <button
@@ -83,14 +86,26 @@ export default function CoreValue() {
               </div>
 
               {isActive ? (
-                <div className="absolute left-0 right-0 top-0 bg-white px-4 py-4 text-black md:h-[213px] md:px-[18px] md:py-[23px]">
-                  <h3 className="display text-[40px] font-medium leading-[0.98] md:text-[56px]">
-                    <span className="text-[#111111]">{firstWord.charAt(0)}</span>
-                    <span className="text-[#7f7f7f]">{firstWord.slice(1)}</span>
-                    <br />
-                    <span className="text-[#7f7f7f]">{restWords}</span>
+                <div className="absolute left-0 right-0 top-0 bg-white px-4 py-4 text-black md:px-[18px] md:py-[23px]">
+                  <h3 className="display whitespace-nowrap text-[34px] font-medium leading-[0.98] md:text-[48px]">
+                    {value.lines.map((line, lineIndex) => (
+                      <span key={line} className="block">
+                        {lineIndex === 0 ? (
+                          <>
+                            <span className="text-[#111111]">
+                              {line.charAt(0)}
+                            </span>
+                            <span className="text-[#7f7f7f]">
+                              {line.slice(1)}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-[#7f7f7f]">{line}</span>
+                        )}
+                      </span>
+                    ))}
                   </h3>
-                  <p className="mt-3 max-w-[285px] text-[13px] leading-[1.45] text-[#4c4c4c] md:mt-[18px] md:text-[16px]">
+                  <p className="mt-3 text-[13px] leading-[1.45] text-[#4c4c4c] md:mt-[18px] md:text-[16px]">
                     {value.desc}
                   </p>
                 </div>
