@@ -1,6 +1,20 @@
-export const NAV: { label: string; href: string }[] = [
+export type NavItem = {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+};
+
+export const NAV: NavItem[] = [
   { label: "About", href: "/about" },
-  { label: "Service", href: "/service" },
+  {
+    label: "Service",
+    href: "/service",
+    children: [
+      { label: "USA", href: "/service" },
+      { label: "JAPAN", href: "/japan" },
+      { label: "GLOBAL", href: "/service" },
+    ],
+  },
   { label: "Work", href: "/#work" },
   { label: "Blog", href: "/#blog" },
   { label: "PR", href: "/#pr" },
