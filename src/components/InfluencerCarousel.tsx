@@ -1,39 +1,69 @@
 "use client";
 
 import { useState } from "react";
-import { influencerCards } from "@/lib/images";
+import { japanFilmstrip, japanInfluencerSlides } from "@/lib/images";
 
-// 휴대폰 여러 대가 평면으로 가로로 지나가는 효과 (회전/원근 없음).
+const SHADOW = "0 18px 44px rgba(0,0,0,0.45)";
+
+// 인플루언서 캐러셀 — 한 장의 필름스트립을 3개 슬라이드로 크롭.
+// 좌/우 슬라이드나 하단 점을 누르면 회전문처럼 돌아 해당 슬라이드가 가운데로 온다.
 export default function InfluencerCarousel() {
-  const [paused, setPaused] = useState(false);
-  // 끊김 없는 루프를 위해 카드 목록을 두 번 이어붙임
-  const cards = [...influencerCards, ...influencerCards];
+  const [active, setActive] = useState(1);
+  const n = japanInfluencerSlides.length;
 
   return (
-    <div
-      className="relative w-full overflow-hidden py-4"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div
-        className="flex w-max gap-6"
-        style={{
-          animation: "marquee 40s linear infinite",
-          animationPlayState: paused ? "paused" : "running",
-        }}
-      >
-        {cards.map((src, i) => (
-          <div
+    <div className="absolute left-[560px] top-[150px] h-[660px] w-[820px]">
+      <div className="relative h-[600px] w-full">
+        {japanInfluencerSlides.map((pos, i) => {
+          // 활성 슬라이드 기준 상대 위치(-1 좌 / 0 중앙 / 1 우), 순환 처리
+          let rel = i - active;
+          if (rel > n / 2) rel -= n;
+          if (rel < -n / 2) rel += n;
+          const isCenter = rel === 0;
+          const offset = rel * 250;
+          const scale = isCenter ? 1 : 0.82;
+
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setActive(i)}
+              aria-label={`slide ${i + 1}`}
+              className="absolute left-1/2 top-1/2 h-[560px] w-[320px] overflow-hidden rounded-[22px] bg-gray-soft transition-all duration-500 ease-out"
+              style={{
+                transform: `translate(-50%, -50%) translateX(${offset}px) scale(${scale})`,
+                zIndex: isCenter ? 30 : 20 - Math.abs(rel),
+                opacity: isCenter ? 1 : 0.7,
+                boxShadow: SHADOW,
+                cursor: isCenter ? "default" : "pointer",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={japanFilmstrip}
+                alt=""
+                className="h-full w-full object-cover"
+                style={{ objectPosition: `${pos}% 50%` }}
+                draggable={false}
+              />
+              {!isCenter && <div className="absolute inset-0 bg-black/30" />}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* 하단 점 네비게이션 */}
+      <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 gap-[20px]">
+        {japanInfluencerSlides.map((_, i) => (
+          <button
             key={i}
-            className="h-[535px] w-[300px] flex-none overflow-hidden rounded-[24px] bg-gray-soft shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-black/5"
-          >
-            <img
-              src={src}
-              alt=""
-              className="h-full w-full object-cover"
-              draggable={false}
-            />
-          </div>
+            type="button"
+            onClick={() => setActive(i)}
+            aria-label={`go to slide ${i + 1}`}
+            className={`h-[14px] w-[14px] rounded-full transition-colors duration-300 ${
+              i === active ? "bg-white" : "bg-white/40 hover:bg-white/70"
+            }`}
+          />
         ))}
       </div>
     </div>

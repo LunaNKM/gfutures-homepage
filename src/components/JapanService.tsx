@@ -1,9 +1,8 @@
-import {
-  japanAccountCards,
-  japanAccountIcons,
-  japanInfluencerCards,
-} from "@/lib/images";
+import { japanAccountCards, japanAccountIcons } from "@/lib/images";
 import ScrollReveal from "./ScrollReveal";
+import InfluencerCarousel from "./InfluencerCarousel";
+
+const moreCategories = ["POP UP", "Offline", "IP·Media", "OOH"];
 
 // Figma node 320:669 — Service(JAPAN) 본문. 1440px 캔버스 기준이며
 // FitWidth(zoom)로 화면 폭에 맞춰 유동적으로 축소된다.
@@ -161,57 +160,8 @@ export default function JapanService() {
           ❸ 세일즈 콜라보
         </p>
 
-        {/* 우측 겹친 카드 3장 + 일본어 오버레이 */}
-        <div
-          className="absolute left-[590px] top-[180px] h-[600px] w-[300px] overflow-hidden rounded-[20px] bg-gray-soft"
-          style={{ boxShadow: CARD_SHADOW, transform: "rotate(-3deg)" }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={japanInfluencerCards[0].src}
-            alt=""
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div
-          className="absolute left-[1040px] top-[210px] h-[560px] w-[300px] overflow-hidden rounded-[20px] bg-gray-soft"
-          style={{ boxShadow: CARD_SHADOW, transform: "rotate(3deg)" }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={japanInfluencerCards[2].src}
-            alt=""
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div
-          className="absolute left-[815px] top-[150px] z-10 h-[630px] w-[330px] overflow-hidden rounded-[20px] bg-gray-soft"
-          style={{ boxShadow: CARD_SHADOW }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={japanInfluencerCards[1].src}
-            alt=""
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/15" />
-          <div
-            className="absolute right-[18px] top-[28px] flex gap-2 text-white"
-            style={{ writingMode: "vertical-rl" }}
-          >
-            <span className="display text-[44px] font-bold leading-[1.05] tracking-tight">
-              韓国No.1化粧品会社の
-            </span>
-            <span className="display text-[44px] font-bold leading-[1.05] tracking-tight">
-              アモーレパシフィック
-            </span>
-          </div>
-        </div>
-
-        {/* carousel dots */}
-        <span className="absolute left-[908px] top-[860px] z-20 h-[14px] w-[14px] rounded-full bg-white" />
-        <span className="absolute left-[958px] top-[860px] z-20 h-[14px] w-[14px] rounded-full bg-white/40" />
-        <span className="absolute left-[1008px] top-[860px] z-20 h-[14px] w-[14px] rounded-full bg-white/40" />
+        {/* 우측 인터랙티브 캐러셀 (클릭 시 회전) */}
+        <InfluencerCarousel />
       </ScrollReveal>
 
       {/* ── Performance Marketing (white, h=964) ── */}
@@ -244,33 +194,76 @@ export default function JapanService() {
         className="relative h-[890px] w-full overflow-hidden bg-black"
       >
         <div id="jp-more" className="absolute top-[-88px]" />
-        {menuRows.map((row) => (
-          <a
-            key={row.title}
-            href={row.href}
-            className="group absolute left-0 block w-full transition-colors duration-300 hover:bg-white"
-            style={{ top: row.top, height: row.height }}
-          >
-            <span
-              className="absolute left-[111px] text-[23px] font-medium leading-[34px] text-white transition-colors duration-300 group-hover:text-black"
-              style={{ top: row.subTop }}
+        {menuRows.map((row) =>
+          row.title === "& More" ? (
+            // & More — 클릭이 아니라 hover 시 하위 항목(카테고리)이 펼쳐진다.
+            <div
+              key={row.title}
+              className="group absolute left-0 w-full"
+              style={{ top: row.top, height: row.height }}
             >
-              {row.sub}
-            </span>
-            <span
-              className="display absolute left-[111px] text-[49px] leading-none text-white transition-colors duration-300 group-hover:text-black"
-              style={{ top: row.titleTop }}
+              <span
+                className="absolute left-[111px] text-[23px] font-medium leading-[34px] text-white transition-opacity duration-300 group-hover:opacity-0"
+                style={{ top: row.subTop }}
+              >
+                {row.sub}
+              </span>
+              <span
+                className="display absolute left-[111px] text-[49px] leading-none text-white"
+                style={{ top: row.titleTop }}
+              >
+                {row.title}
+              </span>
+              <span
+                className="absolute left-[1316px] text-[30px] leading-none text-white transition-transform duration-300 group-hover:rotate-90"
+                style={{ top: row.arrowTop }}
+              >
+                ↗
+              </span>
+              {/* hover 시 펼쳐지는 하위 항목 */}
+              <div
+                className="absolute left-[470px] flex h-[44px] translate-x-3 items-center gap-[14px] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                style={{ top: row.titleTop + 4 }}
+              >
+                {moreCategories.map((c) => (
+                  <a
+                    key={c}
+                    href="/japan/more"
+                    className="rounded-full border border-white/55 px-5 py-2 text-[18px] font-medium text-white transition-colors hover:bg-white hover:text-black"
+                  >
+                    {c}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              key={row.title}
+              href={row.href}
+              className="group absolute left-0 block w-full transition-colors duration-300 hover:bg-white"
+              style={{ top: row.top, height: row.height }}
             >
-              {row.title}
-            </span>
-            <span
-              className="absolute left-[1316px] text-[30px] leading-none text-white transition-colors duration-300 group-hover:text-black"
-              style={{ top: row.arrowTop }}
-            >
-              ↗
-            </span>
-          </a>
-        ))}
+              <span
+                className="absolute left-[111px] text-[23px] font-medium leading-[34px] text-white transition-colors duration-300 group-hover:text-black"
+                style={{ top: row.subTop }}
+              >
+                {row.sub}
+              </span>
+              <span
+                className="display absolute left-[111px] text-[49px] leading-none text-white transition-colors duration-300 group-hover:text-black"
+                style={{ top: row.titleTop }}
+              >
+                {row.title}
+              </span>
+              <span
+                className="absolute left-[1316px] text-[30px] leading-none text-white transition-colors duration-300 group-hover:text-black"
+                style={{ top: row.arrowTop }}
+              >
+                ↗
+              </span>
+            </a>
+          )
+        )}
         {/* 구분선 */}
         {[236, 409, 577, 750].map((t) => (
           <span

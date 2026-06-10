@@ -24,12 +24,12 @@ export const japanAccountCards = [
   { src: "/figma/32ecd3061b2fb9fa.png", x: 1303, y: 535, w: 286, h: 368 },
 ];
 
-// Influencer Marketing: 우측 이미지 (y는 인플루언서 블록 기준, 블록 시작 y=979)
-export const japanInfluencerCards = [
-  { src: "/figma/8df371a5683c5c8e.png", x: 648, y: 223, w: 435, h: 624 },
-  { src: "/figma/f396bfb2105743f0.png", x: 866, y: 172, w: 488, h: 727 },
-  { src: "/figma/79a4a01537d564dc.png", x: 1144, y: 224, w: 420, h: 624 },
-];
+// Influencer Marketing: Figma 원본은 한 장의 가로 필름스트립 이미지를
+// 3개 카드가 서로 다른 부분으로 크롭해 보여준다(일본어 카피도 이미지에 포함).
+export const japanFilmstrip = "/figma/8df371a5683c5c8e.png";
+
+// 캐러셀 슬라이드 = 필름스트립의 가로 위치(object-position %)
+export const japanInfluencerSlides = [27, 53, 77];
 
 export const missionImg = "/figma/f91d138c2fd90fd4.png";
 export const visionImg = "/figma/4412c0485d51e00d.png";
