@@ -3,6 +3,34 @@ export const heroBgAlt = "/figma/d18a663fd0d42df2.png";
 export const aboutBg = "/figma/60b12f64ee6b91b3.jpg";
 export const japanBg = "/figma/fb3f9621199295a0.png";
 
+// Service(JAPAN) — Figma node 320:669 좌표를 그대로 옮긴 에셋 맵 (1440px 캔버스 기준).
+export const japanBandBg = "/figma/e20bf4e341438f9b.jpg";
+
+// Account Management: 운영 가능한 매체 아이콘 (좌표/크기 = Figma 원본)
+export const japanAccountIcons = [
+  { src: "/figma/03b40e374d18caea.png", x: 99, y: 516, w: 80, h: 60 },
+  { src: "/figma/97249c2259aefa5f.png", x: 184, y: 516, w: 70, h: 60 },
+  { src: "/figma/b14aa7d91022ce92.png", x: 260, y: 523, w: 50, h: 50 },
+  { src: "/figma/f4ffbeb7aeb1fd2f.png", x: 336, y: 523, w: 166, h: 46 },
+  { src: "/figma/4798a451e7398e89.png", x: 505, y: 523, w: 105, h: 46 },
+];
+
+// Account Management: 우측 리뷰 콘텐츠 콜라주 (y는 블록 기준)
+export const japanAccountCards = [
+  { src: "/figma/fab7f1f9a59bf905.png", x: 728, y: 138, w: 286, h: 368 },
+  { src: "/figma/cb49f4f308a1da86.png", x: 1032, y: 128, w: 286, h: 368 },
+  { src: "/figma/178c1b1d6e6ce1a9.png", x: 1328, y: 128, w: 286, h: 368 },
+  { src: "/figma/7d1fe7b0e32ea42f.png", x: 636, y: 535, w: 661, h: 368 },
+  { src: "/figma/32ecd3061b2fb9fa.png", x: 1303, y: 535, w: 286, h: 368 },
+];
+
+// Influencer Marketing: 우측 이미지 (y는 인플루언서 블록 기준, 블록 시작 y=979)
+export const japanInfluencerCards = [
+  { src: "/figma/8df371a5683c5c8e.png", x: 648, y: 223, w: 435, h: 624 },
+  { src: "/figma/f396bfb2105743f0.png", x: 866, y: 172, w: 488, h: 727 },
+  { src: "/figma/79a4a01537d564dc.png", x: 1144, y: 224, w: 420, h: 624 },
+];
+
 export const missionImg = "/figma/f91d138c2fd90fd4.png";
 export const visionImg = "/figma/4412c0485d51e00d.png";
 
