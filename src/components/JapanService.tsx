@@ -5,19 +5,36 @@ import {
 } from "@/lib/images";
 import ScrollReveal from "./ScrollReveal";
 
-// Figma node 320:669 — 1440px 캔버스 픽셀 좌표 그대로 옮긴 Service(JAPAN) 본문.
-// Account → Influencer → Performance → 하단 서비스 메뉴 순서로 세로 스크롤.
+// Figma node 320:669 — Service(JAPAN) 본문. 1440px 캔버스 기준이며
+// FitWidth(zoom)로 화면 폭에 맞춰 유동적으로 축소된다.
+// Account → Influencer → Performance → 하단 서비스 메뉴 순서.
 
-type Pos = { src: string; x: number; y: number; w: number; h: number };
+const CARD_SHADOW = "0 14px 36px rgba(0,0,0,0.18)";
 
-function CoverImg({ src, x, y, w, h }: Pos) {
+// 한 행 안에서 hover 시 해당 카드가 커지고 나머지를 밀어내는 아코디언.
+function AccordionRow({
+  cards,
+  height,
+  defaultIndex = -1,
+}: {
+  cards: { src: string }[];
+  height: number;
+  defaultIndex?: number;
+}) {
   return (
-    <div
-      className="absolute overflow-hidden bg-gray-soft"
-      style={{ left: x, top: y, width: w, height: h }}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt="" className="h-full w-full object-cover" />
+    <div className="group/row flex gap-[14px]" style={{ height }}>
+      {cards.map((c, i) => (
+        <div
+          key={c.src}
+          className={`relative basis-0 grow overflow-hidden rounded-[18px] bg-gray-soft transition-[flex-grow] duration-500 ease-out hover:!grow-[2.6] ${
+            i === defaultIndex ? "grow-[2.4] group-hover/row:grow-[1]" : ""
+          }`}
+          style={{ boxShadow: CARD_SHADOW }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={c.src} alt="" className="h-full w-full object-cover" />
+        </div>
+      ))}
     </div>
   );
 }
@@ -56,7 +73,7 @@ const menuRows = [
   {
     title: "& More",
     sub: "일본 현지 네트워킹 바탕 일본 전략 수립",
-    href: "#jp-more",
+    href: "/japan/more",
     top: 577,
     height: 173,
     titleTop: 38,
@@ -82,30 +99,37 @@ export default function JapanService() {
           <br />
           Management
         </h2>
-        <span className="absolute left-[1333px] top-[277px] text-[30px] leading-none text-black">
-          ↗
-        </span>
-        <p className="absolute left-[118px] top-[411px] w-[560px] text-[23px] font-medium leading-[34px] text-black">
+        <p className="absolute left-[118px] top-[411px] w-[470px] text-[23px] font-medium leading-[34px] text-black">
           공식 계정은 단순히 브랜드의 톤앤매너를 보여주는 공간이 아닌, 현지
           소비자에게 안심과 신뢰를 전달하는 매개체입니다.
         </p>
-        {japanAccountIcons.map((ic) => (
-          <div
-            key={ic.src}
-            className="absolute"
-            style={{ left: ic.x, top: ic.y, width: ic.w, height: ic.h }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={ic.src}
-              alt=""
-              className="h-full w-full object-contain object-left"
-            />
-          </div>
-        ))}
-        {japanAccountCards.map((c) => (
-          <CoverImg key={c.src} {...c} />
-        ))}
+        {/* 운영 가능한 매체 아이콘 */}
+        <div className="absolute left-[118px] top-[512px] flex h-[40px] items-center gap-[20px]">
+          {japanAccountIcons.map((ic) => (
+            <div
+              key={ic.src}
+              className="flex h-full items-center"
+              style={{ width: (ic.w / ic.h) * 36 }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={ic.src}
+                alt=""
+                className="max-h-[36px] w-full object-contain"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* 우측 리뷰 콜라주 — 2행 아코디언 (hover 시 확대 + 밀어내기) */}
+        <div className="absolute left-[636px] top-[128px] flex w-[772px] flex-col gap-[14px]">
+          <AccordionRow cards={japanAccountCards.slice(0, 3)} height={384} />
+          <AccordionRow
+            cards={japanAccountCards.slice(3, 5)}
+            height={372}
+            defaultIndex={0}
+          />
+        </div>
       </ScrollReveal>
 
       {/* ── Influencer Marketing (black, h=1070) ── */}
@@ -114,9 +138,6 @@ export default function JapanService() {
         className="relative h-[1070px] w-full overflow-hidden bg-black"
       >
         <div id="jp-influencer" className="absolute top-[-88px]" />
-        {japanInfluencerCards.map((c) => (
-          <CoverImg key={c.src} {...c} />
-        ))}
         <p className="absolute left-[131px] top-[92px] text-[23px] font-medium leading-[34px] text-white">
           인플루언서 전략 제안
         </p>
@@ -139,10 +160,58 @@ export default function JapanService() {
         <p className="absolute left-[131px] top-[677px] text-[23px] font-medium leading-[34px] text-white">
           ❸ 세일즈 콜라보
         </p>
+
+        {/* 우측 겹친 카드 3장 + 일본어 오버레이 */}
+        <div
+          className="absolute left-[590px] top-[180px] h-[600px] w-[300px] overflow-hidden rounded-[20px] bg-gray-soft"
+          style={{ boxShadow: CARD_SHADOW, transform: "rotate(-3deg)" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={japanInfluencerCards[0].src}
+            alt=""
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div
+          className="absolute left-[1040px] top-[210px] h-[560px] w-[300px] overflow-hidden rounded-[20px] bg-gray-soft"
+          style={{ boxShadow: CARD_SHADOW, transform: "rotate(3deg)" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={japanInfluencerCards[2].src}
+            alt=""
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div
+          className="absolute left-[815px] top-[150px] z-10 h-[630px] w-[330px] overflow-hidden rounded-[20px] bg-gray-soft"
+          style={{ boxShadow: CARD_SHADOW }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={japanInfluencerCards[1].src}
+            alt=""
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/15" />
+          <div
+            className="absolute right-[18px] top-[28px] flex gap-2 text-white"
+            style={{ writingMode: "vertical-rl" }}
+          >
+            <span className="display text-[44px] font-bold leading-[1.05] tracking-tight">
+              韓国No.1化粧品会社の
+            </span>
+            <span className="display text-[44px] font-bold leading-[1.05] tracking-tight">
+              アモーレパシフィック
+            </span>
+          </div>
+        </div>
+
         {/* carousel dots */}
-        <span className="absolute left-[980px] top-[972px] h-[23px] w-[24px] rounded-full bg-white" />
-        <span className="absolute left-[1060px] top-[972px] h-[23px] w-[24px] rounded-full bg-white/40" />
-        <span className="absolute left-[1140px] top-[972px] h-[23px] w-[24px] rounded-full bg-white/40" />
+        <span className="absolute left-[908px] top-[860px] z-20 h-[14px] w-[14px] rounded-full bg-white" />
+        <span className="absolute left-[958px] top-[860px] z-20 h-[14px] w-[14px] rounded-full bg-white/40" />
+        <span className="absolute left-[1008px] top-[860px] z-20 h-[14px] w-[14px] rounded-full bg-white/40" />
       </ScrollReveal>
 
       {/* ── Performance Marketing (white, h=964) ── */}
@@ -162,7 +231,7 @@ export default function JapanService() {
           설계하고 메타, X, LINE, Google 등 일본 내 주 사용 채널 중심의 광고
           집행을 도와 드립니다.
         </p>
-        <div className="absolute left-[134px] top-[368px] flex h-[481px] w-[1180px] items-center justify-center bg-gray-soft">
+        <div className="absolute left-[134px] top-[368px] flex h-[481px] w-[1172px] items-center justify-center rounded-[12px] bg-gray-soft">
           <span className="display text-[49px] leading-none text-black">
             GFU DASH
           </span>

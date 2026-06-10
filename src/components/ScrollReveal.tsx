@@ -10,11 +10,13 @@ export default function ScrollReveal({
   className = "",
   delay = 0,
   as: Tag = "div",
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   as?: React.ElementType;
+  style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -48,6 +50,7 @@ export default function ScrollReveal({
       ref={ref}
       className={className}
       style={{
+        ...style,
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : hidden,
         transition: `opacity 0.7s ease-out ${delay}s, transform 0.7s ease-out ${delay}s`,
