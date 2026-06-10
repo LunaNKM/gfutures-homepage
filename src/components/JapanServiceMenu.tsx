@@ -70,7 +70,7 @@ export default function JapanServiceMenu() {
       {/* ── 하단 서비스 메뉴 (black, h=890) ── */}
       <ScrollReveal
         as="div"
-        className="relative h-[890px] w-full overflow-hidden bg-black"
+        className="relative h-[750px] w-full overflow-hidden bg-black"
       >
         <div id="jp-more" className="absolute top-[-88px]" />
         {menuRows.map((row) =>
@@ -80,23 +80,31 @@ export default function JapanServiceMenu() {
               key={row.title}
               type="button"
               onClick={() => setExpanded((v) => !v)}
-              className="group absolute left-0 block w-full text-left transition-colors duration-300 hover:bg-white"
+              className={`group absolute left-0 block w-full text-left transition-colors duration-300 hover:bg-white ${
+                expanded ? "bg-white" : ""
+              }`}
               style={{ top: row.top, height: row.height }}
             >
               <span
-                className="absolute left-[111px] text-[23px] font-medium leading-[34px] text-white transition-colors duration-300 group-hover:text-black"
+                className={`absolute left-[111px] text-[23px] font-medium leading-[34px] transition-all duration-300 group-hover:text-black ${
+                  expanded ? "text-black opacity-0" : "text-white"
+                }`}
                 style={{ top: row.subTop }}
               >
                 {row.sub}
               </span>
               <span
-                className="display absolute left-[111px] text-[49px] leading-none text-white transition-colors duration-300 group-hover:text-black"
+                className={`display absolute left-[111px] text-[49px] leading-none transition-colors duration-300 group-hover:text-black ${
+                  expanded ? "text-black" : "text-white"
+                }`}
                 style={{ top: row.titleTop }}
               >
                 {row.title}
               </span>
               <span
-                className="absolute left-[1316px] text-[30px] leading-none text-white transition-[transform,color] duration-300 group-hover:text-black"
+                className={`absolute left-[1316px] text-[30px] leading-none transition-[transform,color] duration-300 group-hover:text-black ${
+                  expanded ? "text-black" : "text-white"
+                }`}
                 style={{
                   top: row.arrowTop,
                   transform: expanded ? "rotate(90deg)" : "none",
@@ -151,14 +159,9 @@ export default function JapanServiceMenu() {
       >
         <div className="overflow-hidden">
           <div className="relative w-full pb-[160px]">
-            <div className="relative h-[230px]">
-              <h2 className="display absolute left-[110px] top-[73px] text-[49px] leading-none text-black">
-                &amp; More
-              </h2>
-              <span className="absolute left-[1296px] top-[49px] text-[30px] leading-none text-black">
-                ↗
-              </span>
-              <p className="absolute left-[110px] top-[146px] text-[23px] font-medium leading-[34px] text-black">
+            {/* & More 제목은 위의 메뉴 행이 그대로 펼쳐진 것이므로 여기서는 설명만. */}
+            <div className="relative h-[140px]">
+              <p className="absolute left-[110px] top-[56px] text-[23px] font-medium leading-[34px] text-black">
                 일본 현지 강력한 네트워킹을 바탕으로 고객의 목표 달성에 필요한 전
                 과정을 함께 하겠습니다.
               </p>
