@@ -67,17 +67,14 @@ export const clientLogoRows = [
   ],
 ];
 
+// width/height/x/y 모두 Figma 원본(node 433-746, 1440px 캔버스)의 각 로고 박스 값.
 export const partnerSectionLogos = [
-  {
-    label: "AMOREPACIFIC",
-    src: "/figma/logos/partner-amorepacific.png",
-    width: 218,
-  },
-  { label: "TikTok", src: "/figma/logos/partner-tiktok.png", width: 139 },
-  { label: "lala", src: "/figma/logos/partner-lala.png", width: 153 },
-  { label: "GS Global", src: "/figma/logos/partner-gsglobal.png", width: 213 },
-  { label: "TBWA", src: "/figma/logos/partner-tbwa.png", width: 185 },
-  { label: "Johoro", src: "/figma/logos/partner-johoro.png", width: 120 },
+  { label: "AMOREPACIFIC", src: "/figma/logos/partner-amorepacific.png", width: 218, height: 57, x: 645, y: 255 },
+  { label: "TikTok", src: "/figma/logos/partner-tiktok.png", width: 139, height: 42, x: 897, y: 263 },
+  { label: "lala", src: "/figma/logos/partner-lala.png", width: 153, height: 153, x: 1062, y: 207 },
+  { label: "GS Global", src: "/figma/logos/partner-gsglobal.png", width: 213, height: 57, x: 692, y: 394 },
+  { label: "TBWA", src: "/figma/logos/partner-tbwa.png", width: 185, height: 84, x: 948, y: 380 },
+  { label: "Johoro", src: "/figma/logos/partner-johoro.png", width: 120, height: 124, x: 1172, y: 360 },
 ];
 
 export const influencerCards = [

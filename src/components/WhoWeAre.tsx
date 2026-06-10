@@ -9,19 +9,17 @@ export default function WhoWeAre() {
           <span className="display text-[18px] leading-none">About us</span>
         </div>
 
-        <h2 className="display mt-11 text-center text-[48px] leading-none md:mt-[52px] md:text-[85px]">
+        <h2 className="display mt-11 text-center text-[48px] leading-none md:mt-[52px] md:text-[74px]">
           Who We Are
         </h2>
 
-        <p className="mt-8 max-w-[620px] text-center text-[18px] font-medium leading-[1.55] tracking-[-0.01em] md:mt-[47px] md:text-[23px] md:leading-[36px]">
-          GFS는 글로벌 미래를 준비하는 기업으로 지금 이 순간에도
-          <br />
-          다양하고 창의적인 시도를 실천하고 있습니다.
-          <br />
+        <p className="mt-8 max-w-[620px] text-center text-[18px] font-medium leading-[1.55] tracking-[-0.01em] md:mt-[47px] md:text-[21px] md:leading-[31px]">
           GFS는 Global No.1 Partner가 되는 것을 위해 나아갑니다.
+          <br />
+          성공적인 글로벌 진출의 시작, 지퓨처스와 함께 하세요.
         </p>
 
-        <div className="mt-16 grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:mt-[77px] md:grid-cols-4 md:gap-0">
+        <div className="mt-16 grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:mt-[77px] md:max-w-[930px] md:grid-cols-4 md:gap-0">
           {stats.map((s) => (
             <div
               key={s.label}

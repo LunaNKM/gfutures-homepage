@@ -7,9 +7,9 @@ export default function HowWeDo() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="w-full bg-white px-6 py-[92px] text-black md:h-[720px] md:px-0 md:py-0">
-      <div className="mx-auto max-w-[1088px]">
-        <h2 className="display text-[48px] leading-none md:pt-[128px] md:text-[65.5px]">
+    <section className="w-full bg-white px-6 py-[92px] text-black md:h-[854px] md:px-0 md:py-0">
+      <div className="mx-auto max-w-[1048px]">
+        <h2 className="display text-[48px] leading-none md:pt-[164px] md:text-[65.5px]">
           How We Do
         </h2>
         <div className="mt-12 flex h-[360px] w-full gap-[1px] md:mt-[73px] md:h-[308px]">

@@ -1,17 +1,9 @@
 import Link from "next/link";
 import { company } from "@/lib/site";
 
-const footerNav = [
-  { label: "About", href: "/about" },
-  { label: "Work", href: "/#work" },
-  { label: "Service", href: "/service" },
-  { label: "Blog", href: "/#blog" },
-  { label: "News", href: "/#pr" },
-];
-
 function InstagramIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[18px] w-[18px]">
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
       <rect
         x="5"
         y="5"
@@ -37,7 +29,7 @@ function InstagramIcon() {
 
 function NaverBlogIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[18px] w-[18px]">
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
       <path
         d="M5 6.5h14v9.2H9.4L6.3 19v-3.3H5V6.5Z"
         fill="none"
@@ -53,89 +45,94 @@ function NaverBlogIcon() {
   );
 }
 
+function DownloadIcon() {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden="true" className="h-5 w-5">
+      <path
+        d="M10 3v10m0 0 4-4m-4 4-4-4M4 16.5h12"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function Footer() {
   return (
-    <footer className="w-full bg-footer px-6 py-12 text-white md:h-[465px] md:px-0 md:py-0">
-      <div className="grid gap-12 md:grid-cols-[350px_minmax(0,1fr)_330px]">
-        <div className="border-white/35 md:h-[465px] md:border-r md:pl-5 md:pt-[52px]">
-          <p className="font-logo text-[24px] font-bold uppercase leading-none tracking-[-0.03em]">
+    <footer className="w-full bg-footer text-white">
+      <div className="mx-auto grid max-w-[1440px] gap-10 px-6 py-14 md:grid-cols-[584px_424px_minmax(0,1fr)] md:gap-0 md:px-0 md:py-0">
+        {/* Col 1 — 로고 + 태그라인 */}
+        <div className="md:h-[652px] md:pl-[83px] md:pt-[132px]">
+          <p className="font-logo text-[40px] font-bold uppercase leading-none tracking-[-0.03em] md:text-[76px]">
             GFUTURES
           </p>
-          <nav className="mt-24 flex flex-col items-start md:mt-[132px]">
-            {footerNav.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="display text-[36px] leading-[1.06] tracking-[-0.04em] transition-opacity hover:opacity-60 md:text-[40px]"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-
-        <div className="flex flex-col justify-end md:h-[465px] md:px-[25px] md:pb-[34px]">
-          <Link
-            href="/about"
-            className="flex w-fit items-start gap-3 text-[19px] font-bold leading-none tracking-[-0.03em] transition-opacity hover:opacity-70"
-          >
-            <span>회사소개서</span>
-            <span className="relative inline-flex h-6 w-5 items-start justify-center">
-              <span aria-hidden="true" className="text-[20px] leading-none">
-                ↓
-              </span>
-              <span className="absolute bottom-0 h-[2px] w-[14px] bg-white" />
-            </span>
-          </Link>
-          <p className="mt-5 max-w-[660px] text-[18px] font-semibold leading-[1.22] tracking-[-0.03em] md:text-[20px]">
-            {company.footerCopy}
+          <p className="display mt-8 text-[28px] leading-none tracking-[-0.03em] md:mt-[36px] md:text-[36px] md:leading-[36px]">
+            Global No.1
+            <br />
+            Strategic
+            <br />
+            Partner,
           </p>
         </div>
 
-        <div className="md:h-[465px] md:pt-[52px]">
+        {/* Col 2 — Office / Contact / Follow */}
+        <div className="md:h-[652px] md:border-x md:border-white/15 md:pl-[58px] md:pt-[132px]">
           <div>
-            <p className="text-[16px] font-semibold leading-none tracking-[-0.02em] text-white/55">
+            <p className="text-[16px] font-medium leading-none tracking-[-0.02em] text-white/55">
               Our Office
             </p>
-            <p className="mt-4 text-[16px] leading-[1.55] tracking-[-0.02em]">
+            <p className="mt-[10px] text-[16px] leading-[1.55] tracking-[-0.02em]">
               {company.address}
               <br />
               {company.bizNo}
             </p>
           </div>
 
-          <div className="mt-11">
-            <p className="text-[16px] font-semibold leading-none tracking-[-0.02em] text-white/55">
+          <div className="mt-[42px]">
+            <p className="text-[16px] font-medium leading-none tracking-[-0.02em] text-white/55">
               Contact
             </p>
-            <p className="mt-4 text-[16px] leading-none tracking-[-0.02em]">
+            <p className="mt-[10px] text-[16px] leading-none tracking-[-0.02em]">
               {company.email}
             </p>
           </div>
 
-          <div className="mt-12">
-            <p className="text-[16px] font-semibold leading-none tracking-[-0.02em] text-white/55">
+          <div className="mt-[44px]">
+            <p className="text-[16px] font-medium leading-none tracking-[-0.02em] text-white/55">
               Follow
             </p>
-            <div className="mt-4 flex gap-2">
+            <div className="mt-[11px] flex gap-2">
               <Link
                 href="https://www.instagram.com/"
                 aria-label="Instagram"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 transition-colors hover:bg-white hover:text-black"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 transition-colors hover:bg-white hover:text-black"
               >
                 <InstagramIcon />
               </Link>
               <Link
                 href="https://blog.naver.com/"
                 aria-label="Naver Blog"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 transition-colors hover:bg-white hover:text-black"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 transition-colors hover:bg-white hover:text-black"
               >
                 <NaverBlogIcon />
               </Link>
             </div>
           </div>
+        </div>
 
-          <p className="mt-16 text-[14px] leading-none text-white/85 md:mt-[74px]">
+        {/* Col 3 — 회사소개서 / 카피라이트 */}
+        <div className="flex flex-col md:relative md:h-[652px] md:block">
+          <Link
+            href="/about"
+            className="inline-flex w-fit items-center gap-[11px] text-[20px] font-bold leading-none tracking-[-0.03em] transition-opacity hover:opacity-70 md:absolute md:right-[68px] md:top-[148px]"
+          >
+            <span>회사소개서</span>
+            <DownloadIcon />
+          </Link>
+          <p className="mt-12 text-[14px] leading-none text-white/85 md:absolute md:bottom-[76px] md:right-[42px] md:mt-0">
             {company.copyright}
           </p>
         </div>
