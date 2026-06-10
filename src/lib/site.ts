@@ -96,7 +96,48 @@ export const services = [
 ];
 
 export const japanStats = [
-  { value: "$29.6B", label: "일본 화장품 시장 규모" },
+  { value: "$29.6B", label: "대일 수출액 규모" },
   { value: "250~260조", label: "일본 EC 시장 규모" },
   { value: "KOR", label: "일본 화장품 수입국 1위" },
 ];
+
+// Service (JAPAN) — 좌측 메뉴 + 탭별 상세. 첨부 기획안 4.Service(JAPAN) 기준.
+export const japanServices = [
+  {
+    key: "account",
+    en: "Account Management",
+    ko: "계정 운영 대행",
+    desc: "공식 계정은 단순히 브랜드의 톤앤매너를 보여주는 공간이 아닌, 현지 소비자에게 안심과 신뢰를 전달하는 매개체입니다.",
+    badges: ["Instagram", "X", "LIPS", "@cosme", "Qoo10", "Amazon"],
+  },
+  {
+    key: "influencer",
+    en: "Influencer Marketing",
+    ko: "인플루언서 전략 제안",
+    desc: "브랜드 이미지, 프로모션 목적, 활용 계획 등에 따라 매체·티어 구분 없는 최적화 된 인플루언서 전략을 제안 드립니다. 또한 일본 셀럽 PR, 앰버서더 계약, 전용 광고 상품까지 지원하고 있습니다.",
+    groups: [
+      "❶ 마이크로~메가 인플루언서 PR",
+      "❷ 셀럽 섭외 및 앰버서더 제안",
+      "❸ 세일즈 콜라보 — glo: HANNA, EGA, Tennchimu",
+    ],
+  },
+  {
+    key: "performance",
+    en: "Performance Marketing",
+    ko: "퍼포먼스 마케팅",
+    desc: "크리에이티브 제작부터 광고 운영, 데이터 분석까지 운영의 전 과정을 설계하고 메타, X, LINE, Google 등 일본 내 주 사용 채널 중심의 광고 집행을 도와 드립니다.",
+    dash: "GFU-DASH",
+  },
+  {
+    key: "more",
+    en: "& More",
+    ko: "일본 현지 네트워킹 바탕 전략 수립",
+    desc: "일본 현지 강력한 네트워킹을 바탕으로 고객의 목표 달성에 필요한 전 과정을 함께 하겠습니다.",
+    categories: [
+      { label: "POP UP", items: "앳코스메 · JKCS" },
+      { label: "Offline", items: "돈키호테 · 마츠모토 키요시 · LOFT" },
+      { label: "IP·Media", items: "캐릭터 IP · 미디어(잡지)사" },
+      { label: "OOH", items: "사이버트럭 · 오모테산도 옥외광고" },
+    ],
+  },
+] as const;
