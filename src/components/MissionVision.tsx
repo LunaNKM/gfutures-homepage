@@ -11,38 +11,34 @@ function Block({
   title,
   desc,
   img,
-  reverse = false,
 }: {
   kicker: string;
   title: string;
   desc: string;
   img: string;
-  reverse?: boolean;
 }) {
   return (
-    <div
-      className={`grid gap-8 md:grid-cols-[601px_726px] md:gap-[59px] ${
-        reverse ? "md:grid-cols-[601px_726px]" : ""
-      }`}
-    >
-      <div className={`${reverse ? "md:order-1" : ""}`}>
+    <div className="grid gap-8 md:grid-cols-[600px_553px] md:gap-[112px]">
+      <div>
         <h3 className="display text-[34px] leading-none md:text-[46px]">
           {kicker}
         </h3>
-        <p className="mt-7 text-[26px] font-medium leading-[1.05] tracking-[-0.03em] md:text-[34px]">
+        <p className="mt-7 text-[22px] font-semibold leading-[1.1] tracking-[-0.01em] md:mt-[27px] md:text-[24px]">
           {title}
         </p>
-        <p className="mt-4 max-w-[601px] text-[16px] leading-[1.55] tracking-[-0.01em] text-white/90 md:text-[23px] md:leading-[1.45]">
+        <p className="mt-4 max-w-[601px] text-[14px] leading-[1.5] tracking-[-0.01em] text-white/90 md:mt-[18px] md:text-[15px] md:leading-[23px]">
           {desc}
         </p>
       </div>
 
-      <div
-        className={`relative h-[220px] overflow-hidden bg-gray-soft md:h-[325px] ${
-          reverse ? "md:order-2" : ""
-        }`}
-      >
-        <Image src={img} alt="" fill sizes="(max-width: 768px) 100vw, 726px" className="object-cover" />
+      <div className="relative h-[220px] overflow-hidden bg-gray-soft md:h-[325px]">
+        <Image
+          src={img}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 553px"
+          className="object-cover"
+        />
       </div>
     </div>
   );
@@ -50,18 +46,20 @@ function Block({
 
 export default function MissionVision() {
   return (
-    <section className="w-screen bg-black px-6 py-16 text-white md:h-[1324px] md:w-[1440px] md:px-0 md:py-0">
-      <div className="mx-auto max-w-[1400px] md:pt-[144px]">
-        <div className="flex flex-col gap-14 md:gap-[98px]">
+    <section className="w-full bg-black px-6 py-16 text-white md:h-[1324px] md:px-0 md:py-0">
+      <div className="mx-auto max-w-[1400px] md:pt-[296px]">
+        <div className="md:pl-[88px] md:pr-[44px]">
           <Block
             kicker="Mission"
             title="A Collective Built for Endless Expansion"
             desc={missionDesc}
             img={missionImg}
           />
+        </div>
 
-          <div className="h-px w-full bg-white/45" />
+        <div className="mt-14 h-px w-full bg-white/45 md:mt-[37px]" />
 
+        <div className="mt-14 md:mt-[157px] md:pl-[99px] md:pr-[44px]">
           <Block
             kicker="Vision"
             title="Global No.1 Strategic Partner"
@@ -69,6 +67,8 @@ export default function MissionVision() {
             img={visionImg}
           />
         </div>
+
+        <div className="mt-14 h-px w-full bg-white/45 md:mt-[40px]" />
       </div>
     </section>
   );

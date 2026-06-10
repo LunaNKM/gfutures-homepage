@@ -27,7 +27,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative h-[520px] w-screen overflow-hidden bg-black text-white md:h-[718px] md:w-[1440px]"
+      className="relative h-[520px] w-full overflow-hidden bg-black text-white md:h-[718px]"
     >
       <Image
         src={aboutBg}
@@ -39,16 +39,16 @@ export default function About() {
       />
       <div className="absolute inset-0 bg-black/28" />
 
-      <div className="relative z-10 flex h-full flex-col justify-between px-6 pb-10 pt-24 md:px-[117px] md:pb-[79px] md:pt-[110px]">
-        <h2 className="display text-[54px] leading-none md:text-[100px]">
+      <div className="relative z-10 mx-auto h-full max-w-[1440px]">
+        <h2 className="display absolute bottom-[120px] left-6 text-[54px] leading-none md:bottom-auto md:left-[84px] md:top-[482px] md:text-[100px]">
           About Us
         </h2>
 
-        <div className="self-end text-right">
-          <p className="display text-[26px] leading-none md:mr-[116px] md:text-[35px]">
+        <div className="absolute bottom-10 right-6 text-right md:bottom-auto md:right-[96px] md:top-[515px]">
+          <p className="display text-[26px] leading-none md:text-[35px]">
             Since 2020
           </p>
-          <p className="display mt-3 text-[52px] leading-none md:text-[88px]">
+          <p className="display mt-3 text-[52px] leading-none md:mt-[10px] md:text-[88px]">
             <CountUp value={getDayCount()} />
           </p>
         </div>

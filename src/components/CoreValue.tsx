@@ -36,74 +36,74 @@ export default function CoreValue() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section className="w-screen bg-black px-6 py-16 text-white md:h-[1095px] md:w-[1440px] md:px-0 md:py-0">
-      <div className="mx-auto max-w-[1400px]">
-        <h2 className="display text-center text-[40px] leading-none md:pt-[175px] md:text-[47px]">
-          Core Value
-        </h2>
+    <section className="w-full bg-black px-6 py-16 text-white md:h-[1095px] md:px-0 md:py-0">
+      <h2 className="display text-center text-[40px] leading-none md:pt-[175px] md:text-[47px]">
+        Core Value
+      </h2>
 
-        <div
-          className="mt-12 flex h-[430px] gap-2 md:mt-[104px] md:h-[515px] md:gap-[10px]"
-          onMouseLeave={() => setActive(null)}
-        >
-          {values.map((value, index) => {
-            const img = goats[index];
-            const isActive = active === index;
-            const restTitle = value.title.slice(1);
+      <div
+        className="mx-auto mt-12 flex h-[430px] w-full max-w-[955px] gap-[14px] md:mt-[104px] md:h-[515px]"
+        onMouseLeave={() => setActive(null)}
+      >
+        {values.map((value, index) => {
+          const img = goats[index];
+          const isActive = active === index;
+          const firstWord = value.title.split(" ")[0];
+          const restWords = value.title.slice(firstWord.length).trim();
 
-            return (
-              <button
-                key={value.letter}
-                type="button"
-                onMouseEnter={() => setActive(index)}
-                onFocus={() => setActive(index)}
-                onClick={() => setActive((current) => (current === index ? null : index))}
-                className="relative overflow-hidden text-left transition-[flex-grow] duration-500 ease-out"
-                style={{
-                  flexGrow: isActive ? 6 : 1,
-                  flexBasis: 0,
-                }}
-              >
-                <div className="absolute inset-0">
-                  <Image
-                    src={img.img}
-                    alt={value.letter}
-                    fill
-                    sizes="(max-width: 768px) 20vw, 552px"
-                    className="object-cover grayscale"
-                  />
-                  <div className="absolute inset-0 bg-black/18" />
+          return (
+            <button
+              key={value.letter}
+              type="button"
+              onMouseEnter={() => setActive(index)}
+              onFocus={() => setActive(index)}
+              onClick={() =>
+                setActive((current) => (current === index ? null : index))
+              }
+              className="relative flex-none overflow-hidden text-left transition-[width] duration-500 ease-out"
+              style={{
+                // gap-[14px] × 4 = 56px; 활성 카드는 6/10, 나머지는 1/10 비율
+                width:
+                  active === null
+                    ? "calc((100% - 56px) / 5)"
+                    : isActive
+                      ? "calc((100% - 56px) * 0.6)"
+                      : "calc((100% - 56px) * 0.1)",
+              }}
+            >
+              <div className="absolute inset-0">
+                <Image
+                  src={img.img}
+                  alt={value.letter}
+                  fill
+                  sizes="(max-width: 768px) 30vw, 552px"
+                  className="object-cover grayscale"
+                />
+                <div className="absolute inset-0 bg-black/18" />
+              </div>
+
+              {isActive ? (
+                <div className="absolute left-0 right-0 top-0 bg-white px-4 py-4 text-black md:h-[213px] md:px-[18px] md:py-[23px]">
+                  <h3 className="display text-[40px] font-medium leading-[0.98] md:text-[56px]">
+                    <span className="text-[#111111]">{firstWord.charAt(0)}</span>
+                    <span className="text-[#7f7f7f]">{firstWord.slice(1)}</span>
+                    <br />
+                    <span className="text-[#7f7f7f]">{restWords}</span>
+                  </h3>
+                  <p className="mt-3 max-w-[285px] text-[13px] leading-[1.45] text-[#4c4c4c] md:mt-[18px] md:text-[16px]">
+                    {value.desc}
+                  </p>
                 </div>
-
-                {isActive ? (
-                  <div className="relative h-full">
-                    <div className="absolute left-0 right-0 top-0 bg-white px-4 py-4 text-black md:min-h-[183px] md:px-[18px] md:py-[17px]">
-                      <div className="flex min-h-[120px] flex-col justify-between md:min-h-[149px]">
-                        <div className="flex max-w-[420px] items-start gap-1 leading-[0.95] md:gap-0">
-                          <span className="display shrink-0 text-[40px] font-medium text-[#111111] md:text-[56px]">
-                            {value.letter}
-                          </span>
-                          <span className="display text-[40px] font-medium text-[#7f7f7f] md:text-[56px]">
-                            {restTitle}
-                          </span>
-                        </div>
-                        <p className="max-w-[320px] text-[13px] leading-[1.45] text-[#4c4c4c] md:max-w-[288px] md:text-[23px]">
-                          {value.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="relative flex h-full items-end justify-center pb-4 md:pb-[14px]">
-                    <span className="display text-[32px] leading-none text-white md:text-[56px]">
-                      {value.letter}
-                    </span>
-                  </div>
-                )}
-              </button>
-            );
-          })}
-        </div>
+              ) : (
+                <div className="absolute bottom-0 left-0 flex items-end pb-[18px] pl-4 md:pb-[24px] md:pl-[24px]">
+                  <span className="display text-[32px] font-bold leading-none text-white md:text-[55px]">
+                    {value.letter}
+                  </span>
+                </div>
+              )}
+            </button>
+          );
+        })}
       </div>
     </section>
   );
