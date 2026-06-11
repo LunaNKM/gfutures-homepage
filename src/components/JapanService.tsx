@@ -44,7 +44,7 @@ function AccordionRow({
             <img
               src={c.src}
               alt=""
-              className="h-full object-cover"
+              className="h-full max-w-none object-cover"
               style={{
                 transform: `skewX(${-theta}deg)`,
                 width: `calc(100% + ${2 * over}px)`,
@@ -108,7 +108,7 @@ export default function JapanService() {
             cards={japanAccountCards.slice(3, 5)}
             height={283}
             defaultIndex={0}
-            slants={[-16, 18]}
+            slants={[16, 18]}
           />
         </div>
       </ScrollReveal>
