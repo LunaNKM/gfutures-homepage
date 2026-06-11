@@ -12,15 +12,15 @@ export default function InfluencerCarousel() {
   const n = japanInfluencerSlides.length;
 
   return (
-    <div className="absolute left-[560px] top-[150px] h-[660px] w-[820px]">
-      <div className="relative h-[600px] w-full">
+    <div className="absolute left-[560px] top-[114px] h-[502px] w-[623px]">
+      <div className="relative h-[456px] w-full">
         {japanInfluencerSlides.map((pos, i) => {
           // 활성 슬라이드 기준 상대 위치(-1 좌 / 0 중앙 / 1 우), 순환 처리
           let rel = i - active;
           if (rel > n / 2) rel -= n;
           if (rel < -n / 2) rel += n;
           const isCenter = rel === 0;
-          const offset = rel * 250;
+          const offset = rel * 190;
           const scale = isCenter ? 1 : 0.82;
 
           return (
@@ -29,7 +29,7 @@ export default function InfluencerCarousel() {
               type="button"
               onClick={() => setActive(i)}
               aria-label={`slide ${i + 1}`}
-              className="absolute left-1/2 top-1/2 h-[560px] w-[320px] overflow-hidden rounded-[22px] bg-gray-soft transition-all duration-500 ease-out"
+              className="absolute left-1/2 top-1/2 h-[426px] w-[243px] overflow-hidden rounded-[22px] bg-gray-soft transition-all duration-500 ease-out"
               style={{
                 transform: `translate(-50%, -50%) translateX(${offset}px) scale(${scale})`,
                 zIndex: isCenter ? 30 : 20 - Math.abs(rel),

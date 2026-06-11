@@ -41,13 +41,13 @@ export default function CoreValue() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section className="w-full bg-black px-6 py-16 text-white md:h-[1095px] md:px-0 md:py-0">
-      <h2 className="display text-center text-[40px] leading-none md:pt-[175px] md:text-[47px]">
+    <section className="w-full bg-black px-6 py-16 text-white md:h-[832px] md:px-0 md:py-0">
+      <h2 className="display text-center text-[40px] leading-none md:pt-[133px] md:text-[36px]">
         Core Value
       </h2>
 
       <div
-        className="mx-auto mt-12 flex h-[430px] w-full max-w-[955px] gap-[14px] md:mt-[104px] md:h-[515px]"
+        className="mx-auto mt-12 flex h-[430px] w-full max-w-[955px] gap-[14px] md:mt-[79px] md:h-[391px] md:max-w-[726px]"
         onMouseLeave={() => setActive(null)}
       >
         {values.map((value, index) => {
@@ -86,8 +86,8 @@ export default function CoreValue() {
               </div>
 
               {isActive ? (
-                <div className="absolute left-0 right-0 top-0 bg-white px-4 py-4 text-black md:px-[18px] md:py-[23px]">
-                  <h3 className="display whitespace-nowrap text-[34px] font-medium leading-[0.98] md:text-[48px]">
+                <div className="absolute left-0 right-0 top-0 bg-white px-4 py-4 text-black md:px-[14px] md:py-[17px]">
+                  <h3 className="display whitespace-nowrap text-[34px] font-medium leading-[0.98] md:text-[36px]">
                     {value.lines.map((line, lineIndex) => (
                       <span key={line} className="block">
                         {lineIndex === 0 ? (
@@ -105,13 +105,13 @@ export default function CoreValue() {
                       </span>
                     ))}
                   </h3>
-                  <p className="mt-3 text-[13px] leading-[1.45] text-[#4c4c4c] md:mt-[18px] md:text-[16px]">
+                  <p className="mt-3 text-[13px] leading-[1.45] text-[#4c4c4c] md:mt-[14px] md:text-[13px]">
                     {value.desc}
                   </p>
                 </div>
               ) : (
-                <div className="absolute bottom-0 left-0 flex items-end pb-[18px] pl-4 md:pb-[24px] md:pl-[24px]">
-                  <span className="display text-[32px] font-bold leading-none text-white md:text-[55px]">
+                <div className="absolute bottom-0 left-0 flex items-end pb-[18px] pl-4 md:pb-[18px] md:pl-[18px]">
+                  <span className="display text-[32px] font-bold leading-none text-white md:text-[42px]">
                     {value.letter}
                   </span>
                 </div>

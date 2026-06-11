@@ -18,20 +18,20 @@ function Block({
   img: string;
 }) {
   return (
-    <div className="grid gap-8 md:grid-cols-[600px_553px] md:gap-[112px]">
+    <div className="grid gap-8 md:grid-cols-[456px_420px] md:gap-[85px]">
       <div>
-        <h3 className="display text-[34px] leading-none md:text-[46px]">
+        <h3 className="display text-[34px] leading-none md:text-[35px]">
           {kicker}
         </h3>
-        <p className="mt-7 text-[22px] font-semibold leading-[1.1] tracking-[-0.01em] md:mt-[27px] md:text-[24px]">
+        <p className="mt-7 text-[22px] font-semibold leading-[1.1] tracking-[-0.01em] md:mt-[21px] md:text-[18px]">
           {title}
         </p>
-        <p className="mt-4 max-w-[601px] text-[14px] leading-[1.5] tracking-[-0.01em] text-white/90 md:mt-[18px] md:text-[15px] md:leading-[23px]">
+        <p className="mt-4 max-w-[601px] text-[14px] leading-[1.5] tracking-[-0.01em] text-white/90 md:mt-[14px] md:text-[15px] md:leading-[22px]">
           {desc}
         </p>
       </div>
 
-      <div className="relative h-[220px] overflow-hidden bg-gray-soft md:h-[325px]">
+      <div className="relative h-[220px] overflow-hidden bg-gray-soft md:h-[247px]">
         <Image
           src={img}
           alt=""
@@ -46,9 +46,9 @@ function Block({
 
 export default function MissionVision() {
   return (
-    <section className="w-full bg-black px-6 py-16 text-white md:h-[1324px] md:px-0 md:py-0">
-      <div className="mx-auto max-w-[1400px] md:pt-[296px]">
-        <div className="md:pl-[88px] md:pr-[44px]">
+    <section className="w-full bg-black px-6 py-16 text-white md:h-[1006px] md:px-0 md:py-0">
+      <div className="mx-auto max-w-[1400px] md:pt-[225px]">
+        <div className="md:pl-[67px] md:pr-[33px]">
           <Block
             kicker="Mission"
             title="A Collective Built for Endless Expansion"
@@ -57,9 +57,9 @@ export default function MissionVision() {
           />
         </div>
 
-        <div className="mt-14 h-px w-full bg-white/45 md:mt-[37px]" />
+        <div className="mt-14 h-px w-full bg-white/45 md:mt-[28px]" />
 
-        <div className="mt-14 md:mt-[157px] md:pl-[99px] md:pr-[44px]">
+        <div className="mt-14 md:mt-[119px] md:pl-[75px] md:pr-[33px]">
           <Block
             kicker="Vision"
             title="Global No.1 Strategic Partner"
@@ -68,7 +68,7 @@ export default function MissionVision() {
           />
         </div>
 
-        <div className="mt-14 h-px w-full bg-white/45 md:mt-[40px]" />
+        <div className="mt-14 h-px w-full bg-white/45 md:mt-[30px]" />
       </div>
     </section>
   );

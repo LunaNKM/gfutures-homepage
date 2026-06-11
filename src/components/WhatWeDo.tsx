@@ -44,7 +44,7 @@ function InfinityLoop() {
   return (
     <svg
       viewBox="0 0 540 300"
-      className="mx-auto h-[220px] w-[min(540px,52vw)] overflow-visible md:h-[244px] md:w-[440px]"
+      className="mx-auto h-[220px] w-[min(540px,52vw)] overflow-visible md:h-[185px] md:w-[334px]"
     >
       <ellipse
         cx={CX}
@@ -84,36 +84,36 @@ export default function WhatWeDo() {
   return (
     <section
       id="service"
-      className="w-full bg-black px-6 pb-[96px] pt-[86px] text-white md:px-0 md:pb-[230px] md:pt-[294px]"
+      className="w-full bg-black px-6 pb-[96px] pt-[86px] text-white md:px-0 md:pb-[175px] md:pt-[224px]"
     >
       <div className="mx-auto max-w-[1065px]">
-        <h2 className="display text-center text-[52px] leading-none md:text-[74px]">
+        <h2 className="display text-center text-[52px] leading-none md:text-[56px]">
           What We Do
         </h2>
-        <p className="mx-auto mt-7 max-w-[655px] text-center text-[18px] font-medium leading-[1.45] tracking-[-0.01em] md:mt-[25px] md:max-w-[720px] md:text-[21px] md:leading-[31px]">
+        <p className="mx-auto mt-7 max-w-[655px] text-center text-[18px] font-medium leading-[1.45] tracking-[-0.01em] md:mt-[19px] md:max-w-[720px] md:text-[18px] md:leading-[27px]">
           단발성 대행이 아닌 브랜딩, 마케팅, 커머스가 종합된 LOOP 전략을 제안 드립니다.
         </p>
 
-        <div className="relative mx-auto mt-[48px] flex min-h-[306px] w-full max-w-[835px] items-center justify-center rounded-[2px] border-[3px] border-white md:mt-[86px] md:h-[306px]">
-          <span className="display absolute left-[26px] top-[24px] text-[20px] leading-none md:text-[23px]">
+        <div className="relative mx-auto mt-[48px] flex min-h-[306px] w-full max-w-[835px] items-center justify-center rounded-[2px] border-[3px] border-white md:mt-[65px] md:h-[233px] md:min-h-[233px]">
+          <span className="display absolute left-[26px] top-[24px] text-[20px] leading-none md:text-[17px]">
             Branding
           </span>
-          <span className="display absolute right-[36px] top-[24px] text-[20px] leading-none md:text-[23px]">
+          <span className="display absolute right-[36px] top-[24px] text-[20px] leading-none md:text-[17px]">
             Branding
           </span>
-          <span className="display absolute bottom-[36px] left-[26px] text-[20px] leading-none md:text-[23px]">
+          <span className="display absolute bottom-[36px] left-[26px] text-[20px] leading-none md:text-[17px]">
             Branding
           </span>
-          <span className="display absolute bottom-[36px] right-[36px] text-[20px] leading-none md:text-[23px]">
+          <span className="display absolute bottom-[36px] right-[36px] text-[20px] leading-none md:text-[17px]">
             Branding
           </span>
           <InfinityLoop />
         </div>
 
-        <div className="mt-[66px] md:mt-[221px]">
+        <div className="mt-[66px] md:mt-[168px]">
           <Link
             href="/service"
-            className="mb-7 inline-flex h-[40px] items-center rounded-full border-2 border-white px-6 text-[22px] font-medium uppercase leading-none tracking-tight transition-colors hover:bg-white hover:text-black md:mb-[47px] md:h-[33px] md:text-[24px]"
+            className="mb-7 inline-flex h-[40px] items-center rounded-full border-2 border-white px-6 text-[22px] font-medium uppercase leading-none tracking-tight transition-colors hover:bg-white hover:text-black md:mb-[36px] md:h-[28px] md:text-[18px]"
           >
             see more
           </Link>
@@ -123,12 +123,12 @@ export default function WhatWeDo() {
               <div key={item.title} className="border-b-2 border-white">
                 <button
                   onClick={() => setOpen(isOpen ? -1 : i)}
-                  className="flex w-full items-center justify-between py-[26px] text-left md:py-[36px]"
+                  className="flex w-full items-center justify-between py-[26px] text-left md:py-[27px]"
                 >
-                  <span className="display text-[36px] leading-none md:text-[41px]">
+                  <span className="display text-[36px] leading-none md:text-[31px]">
                     {item.title}
                   </span>
-                  <span className="text-[42px] font-light leading-none md:text-[52px]">
+                  <span className="text-[42px] font-light leading-none md:text-[40px]">
                     {isOpen ? "−" : "+"}
                   </span>
                 </button>
@@ -136,7 +136,7 @@ export default function WhatWeDo() {
                   className="overflow-hidden transition-all duration-300"
                   style={{ maxHeight: isOpen ? 120 : 0 }}
                 >
-                  <p className="pb-6 text-[17px] font-medium leading-[1.45] tracking-[-0.01em] md:text-[19px]">
+                  <p className="pb-6 text-[17px] font-medium leading-[1.45] tracking-[-0.01em] md:text-[15px]">
                     {item.desc}
                   </p>
                 </div>

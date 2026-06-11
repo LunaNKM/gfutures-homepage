@@ -44,35 +44,41 @@ export default function Partners() {
       </div>
 
       {/* 데스크탑: Figma 1440 캔버스 좌표 그대로 절대배치 */}
-      <div className="relative mx-auto hidden h-[727px] w-[1440px] md:block">
-        <h2 className="display absolute left-[138px] top-[164px] text-[74px] leading-none">
+      <div className="relative mx-auto hidden h-[610px] w-[1440px] md:block">
+        <h2 className="display absolute left-[138px] top-[164px] text-[56px] leading-none">
           Our
           <br />
           Partners
         </h2>
-        <p className="absolute left-[143px] top-[346px] max-w-[360px] text-[24px] font-medium leading-[36px] tracking-[-0.01em]">
+        <p className="absolute left-[143px] top-[300px] max-w-[360px] text-[18px] font-medium leading-[27px] tracking-[-0.01em]">
           {partnersCopy}
         </p>
-        {partnerSectionLogos.map((logo) => (
-          <div
-            key={logo.label}
-            className="absolute"
-            style={{
-              left: logo.x,
-              top: logo.y,
-              width: logo.width,
-              height: logo.height,
-            }}
-          >
-            <Image
-              src={logo.src}
-              alt={logo.label}
-              fill
-              sizes={`${logo.width}px`}
-              className="object-contain"
-            />
-          </div>
-        ))}
+        {/* 로고 클러스터(중심 ≈ 968,345)를 헤딩 축소 비율(0.76)에 맞춰 그 자리에서 함께 축소 */}
+        <div
+          className="absolute inset-0"
+          style={{ transform: "scale(0.76)", transformOrigin: "968px 345px" }}
+        >
+          {partnerSectionLogos.map((logo) => (
+            <div
+              key={logo.label}
+              className="absolute"
+              style={{
+                left: logo.x,
+                top: logo.y,
+                width: logo.width,
+                height: logo.height,
+              }}
+            >
+              <Image
+                src={logo.src}
+                alt={logo.label}
+                fill
+                sizes={`${logo.width}px`}
+                className="object-contain"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
