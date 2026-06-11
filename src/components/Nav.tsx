@@ -20,16 +20,18 @@ export default function Nav({ dark = false }: { dark?: boolean }) {
             <div key={item.label} className="group relative">
               <Link
                 href={item.href}
-                className="block px-3 py-2 text-xl font-bold tracking-[-0.03em] transition-opacity hover:opacity-60"
+                className="block px-3 py-2 text-xl font-bold tracking-[-0.03em]"
               >
-                {item.label}
+                <span className="border-b-2 border-transparent pb-1 transition-colors group-hover:border-current">
+                  {item.label}
+                </span>
               </Link>
-              <div className="invisible absolute left-1/2 top-full z-40 flex -translate-x-1/2 flex-col gap-1 rounded-xl bg-black/60 p-2 opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:visible group-hover:opacity-100">
+              <div className="invisible absolute left-1/2 top-full z-40 flex -translate-x-1/2 gap-5 whitespace-nowrap pt-1 opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100">
                 {item.children.map((child) => (
                   <Link
                     key={child.label}
                     href={child.href}
-                    className="whitespace-nowrap rounded-lg px-5 py-2 text-center text-base font-bold tracking-[-0.03em] text-white transition-colors hover:bg-white/15"
+                    className="text-base font-bold tracking-[-0.03em] transition-opacity hover:opacity-60"
                   >
                     {child.label}
                   </Link>
