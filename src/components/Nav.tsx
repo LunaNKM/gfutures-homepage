@@ -26,7 +26,7 @@ export default function Nav({ dark = false }: { dark?: boolean }) {
                   {item.label}
                 </span>
               </Link>
-              <div className="invisible absolute left-1/2 top-full z-40 flex -translate-x-1/2 gap-5 whitespace-nowrap pt-1 opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100">
+              <div className="invisible absolute left-3 top-full z-40 flex gap-5 whitespace-nowrap pt-1 opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100">
                 {item.children.map((child) => (
                   <Link
                     key={child.label}
