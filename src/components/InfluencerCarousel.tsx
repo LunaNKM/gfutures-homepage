@@ -12,7 +12,7 @@ export default function InfluencerCarousel() {
   const n = japanInfluencerSlides.length;
 
   return (
-    <div className="absolute left-[799px] top-[114px] h-[502px] w-[623px]">
+    <div className="absolute left-[640px] top-[114px] h-[502px] w-[623px]">
       <div className="relative h-[456px] w-full">
         {japanInfluencerSlides.map((pos, i) => {
           // 활성 슬라이드 기준 상대 위치(-1 좌 / 0 중앙 / 1 우), 순환 처리

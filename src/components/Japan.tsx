@@ -9,7 +9,7 @@ export default function Japan() {
     <section className="relative w-[1440px] bg-white">
       {/* Hero — Japan Integrated Solutions (h=808→614) */}
       <ScrollReveal className="relative h-[614px] w-full overflow-hidden">
-        <div className="absolute left-[-107px] top-[78px] h-[551px] w-[820px] overflow-hidden bg-gray-soft">
+        <div className="absolute left-[-107px] top-[78px] h-[551px] w-[740px] overflow-hidden bg-gray-soft">
           <img src={japanBg} alt="" className="h-full w-full object-cover" />
         </div>
         <h1 className="display absolute left-[714px] top-[242px] text-[51px] leading-[56px] text-black">
@@ -36,10 +36,10 @@ export default function Japan() {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-black/[0.67]" />
-        <h2 className="display absolute left-[144px] top-[139px] text-[57px] leading-none text-white">
+        <h2 className="display absolute left-[324px] top-[139px] text-[57px] leading-none text-white">
           Why Japan
         </h2>
-        <p className="absolute left-[153px] top-[234px] w-[301px] text-[16px] font-medium leading-[24px] tracking-[-0.01em] text-white">
+        <p className="absolute left-[333px] top-[234px] w-[301px] text-[16px] font-medium leading-[24px] tracking-[-0.01em] text-white">
           일본 시장은 한국 문화에 대한 높은 관심과 충성된 고객 로열티를 가진
           매력적인 시장입니다. 동시에 ‘진정성’과 ‘신뢰도’가 중요한 시장인 만큼,
           전략적인 구조와 현지 네트워킹이 중요합니다.
@@ -49,8 +49,8 @@ export default function Japan() {
         {japanStats.map((s, i) => {
           const valTop = [106, 228, 344][i];
           const labelTop = [160, 283, 398][i];
-          const valLeft = [1049, 1017, 1072][i];
-          const labelLeft = [1043, 1035, 1012][i];
+          const valLeft = [869, 837, 892][i];
+          const labelLeft = [863, 855, 832][i];
           return (
             <div key={s.label} className="text-white">
               <p
