@@ -77,7 +77,7 @@ export default function JapanService() {
         </div>
 
         {/* 우측 리뷰 콜라주 — 2행 아코디언 (hover 시 확대 + 밀어내기) */}
-        <div className="absolute left-[636px] top-[97px] flex w-[587px] flex-col gap-[11px]">
+        <div className="absolute left-[636px] top-[97px] flex w-[661px] flex-col gap-[11px]">
           <AccordionRow cards={japanAccountCards.slice(0, 3)} height={292} />
           <AccordionRow
             cards={japanAccountCards.slice(3, 5)}
@@ -137,7 +137,7 @@ export default function JapanService() {
           설계하고 메타, X, LINE, Google 등 일본 내 주 사용 채널 중심의 광고
           집행을 도와 드립니다.
         </p>
-        <div className="absolute left-[134px] top-[280px] flex h-[366px] w-[891px] items-center justify-center rounded-[12px] bg-gray-soft">
+        <div className="absolute left-[134px] top-[280px] flex h-[366px] w-[1180px] items-center justify-center rounded-[12px] bg-gray-soft">
           <span className="display text-[37px] leading-none text-black">
             GFU DASH
           </span>

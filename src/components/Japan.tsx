@@ -9,7 +9,7 @@ export default function Japan() {
     <section className="relative w-[1440px] bg-white">
       {/* Hero — Japan Integrated Solutions (h=808→614) */}
       <ScrollReveal className="relative h-[614px] w-full overflow-hidden">
-        <div className="absolute left-[-60px] top-[78px] h-[551px] w-[503px] overflow-hidden bg-gray-soft">
+        <div className="absolute left-[-107px] top-[78px] h-[551px] w-[820px] overflow-hidden bg-gray-soft">
           <img src={japanBg} alt="" className="h-full w-full object-cover" />
         </div>
         <h1 className="display absolute left-[714px] top-[242px] text-[51px] leading-[56px] text-black">
