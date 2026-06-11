@@ -14,10 +14,12 @@ function AccordionRow({
   cards,
   height,
   defaultIndex = -1,
+  rotations = [],
 }: {
   cards: { src: string }[];
   height: number;
   defaultIndex?: number;
+  rotations?: number[];
 }) {
   return (
     <div className="group/row flex gap-[14px]" style={{ height }}>
@@ -27,7 +29,10 @@ function AccordionRow({
           className={`relative basis-0 grow overflow-hidden rounded-[18px] bg-gray-soft transition-[flex-grow] duration-500 ease-out hover:!grow-[2.6] ${
             i === defaultIndex ? "grow-[2.4] group-hover/row:grow-[1]" : ""
           }`}
-          style={{ boxShadow: CARD_SHADOW }}
+          style={{
+            boxShadow: CARD_SHADOW,
+            transform: rotations[i] ? `rotate(${rotations[i]}deg)` : undefined,
+          }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={c.src} alt="" className="h-full w-full object-cover" />
@@ -78,11 +83,16 @@ export default function JapanService() {
 
         {/* 우측 리뷰 콜라주 — 2행 아코디언 (hover 시 확대 + 밀어내기) */}
         <div className="absolute left-[636px] top-[97px] flex w-[661px] flex-col gap-[11px]">
-          <AccordionRow cards={japanAccountCards.slice(0, 3)} height={292} />
+          <AccordionRow
+            cards={japanAccountCards.slice(0, 3)}
+            height={292}
+            rotations={[-3, 2, 4]}
+          />
           <AccordionRow
             cards={japanAccountCards.slice(3, 5)}
             height={283}
             defaultIndex={0}
+            rotations={[-2, 4]}
           />
         </div>
       </ScrollReveal>
