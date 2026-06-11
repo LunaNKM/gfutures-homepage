@@ -27,7 +27,7 @@ export default function WhoWeAre() {
             >
               <div className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative px-4 pt-8 transition-transform duration-300 group-hover:translate-x-[25px] md:px-[10px] md:pt-[20px]">
-                <p className="display text-[56px] leading-none transition-colors duration-300 group-hover:text-white md:text-[56px]">
+                <p className="display text-[39px] leading-none transition-colors duration-300 group-hover:text-white md:text-[39px]">
                   <CountUp value={s.value} />
                 </p>
                 <p className="display mt-3 text-[23px] leading-none transition-colors duration-300 group-hover:text-white md:text-[21px]">
