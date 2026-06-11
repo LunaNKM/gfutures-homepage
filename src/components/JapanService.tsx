@@ -7,19 +7,12 @@ import JapanServiceMenu from "./JapanServiceMenu";
 // FitWidth(zoom)로 화면 폭에 맞춰 유동적으로 축소된다.
 // Account → Influencer → Performance → 하단 서비스 메뉴 순서.
 
-const CARD_SHADOW = "drop-shadow(0 12px 24px rgba(0,0,0,0.18))";
+const CARD_SHADOW = "0 14px 30px rgba(0,0,0,0.18)";
 
-// 윗변·밑변은 수평을 유지하고 좌/우 세로변만 비스듬히 깎아 평행사변형(사다리꼴)
-// 모양으로 만든다. slant(px): 양수 = 윗변이 오른쪽으로, 음수 = 윗변이 왼쪽으로 이동.
-function slantClip(slant: number) {
-  if (!slant) return undefined;
-  const m = Math.abs(slant);
-  return slant > 0
-    ? `polygon(${m}px 0, 100% 0, calc(100% - ${m}px) 100%, 0 100%)`
-    : `polygon(0 0, calc(100% - ${m}px) 0, 100% 100%, ${m}px 100%)`;
-}
-
-// 한 행 안에서 hover 시 해당 카드가 커지고 나머지를 밀어내는 아코디언.
+// 카드를 평행사변형으로 만든다. 윗변·밑변은 수평을 유지하고 좌/우 세로변만
+// 비스듬해진다. 부모를 skewX로 기울이고 내부 이미지를 반대로 skewX 상쇄해서
+// 사진(내용물)은 똑바로 서고, 둥근 모서리·그림자도 그대로 살린다.
+// slant(px): 윗변이 밑변 대비 가로로 이동하는 양. 양수 = 오른쪽, 음수 = 왼쪽.
 function AccordionRow({
   cards,
   height,
@@ -33,21 +26,34 @@ function AccordionRow({
 }) {
   return (
     <div className="group/row flex gap-[14px]" style={{ height }}>
-      {cards.map((c, i) => (
-        <div
-          key={c.src}
-          className={`relative basis-0 grow bg-gray-soft transition-[flex-grow] duration-500 ease-out hover:!grow-[2.6] ${
-            i === defaultIndex ? "grow-[2.4] group-hover/row:grow-[1]" : ""
-          }`}
-          style={{
-            filter: CARD_SHADOW,
-            clipPath: slantClip(slants[i] ?? 0),
-          }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={c.src} alt="" className="h-full w-full object-cover" />
-        </div>
-      ))}
+      {cards.map((c, i) => {
+        const s = slants[i] ?? 0;
+        // 윗변을 오른쪽으로 옮기려면 skewX 음수각. 각도는 높이에만 의존하므로
+        // hover로 폭이 변해도 기울기는 일정하게 유지된다.
+        const theta = (Math.atan2(-s, height) * 180) / Math.PI;
+        const over = Math.abs(s); // 기운 모서리까지 이미지로 덮기 위한 여유 폭
+        return (
+          <div
+            key={c.src}
+            className={`relative basis-0 grow overflow-hidden rounded-[18px] bg-gray-soft transition-[flex-grow] duration-500 ease-out hover:!grow-[2.6] ${
+              i === defaultIndex ? "grow-[2.4] group-hover/row:grow-[1]" : ""
+            }`}
+            style={{ boxShadow: CARD_SHADOW, transform: `skewX(${theta}deg)` }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={c.src}
+              alt=""
+              className="h-full object-cover"
+              style={{
+                transform: `skewX(${-theta}deg)`,
+                width: `calc(100% + ${2 * over}px)`,
+                marginLeft: `-${over}px`,
+              }}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -96,7 +102,7 @@ export default function JapanService() {
           <AccordionRow
             cards={japanAccountCards.slice(0, 3)}
             height={292}
-            slants={[-18, 8, 18]}
+            slants={[18, 8, 18]}
           />
           <AccordionRow
             cards={japanAccountCards.slice(3, 5)}
