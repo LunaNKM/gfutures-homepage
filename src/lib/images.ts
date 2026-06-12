@@ -31,6 +31,76 @@ export const japanFilmstrip = "/figma/8df371a5683c5c8e.png";
 // 캐러셀 슬라이드 = 필름스트립의 가로 위치(object-position %)
 export const japanInfluencerSlides = [27, 53, 77];
 
+// Performance Marketing — 3 카드 (Figma node 320:669, 510:177x / 524:18xx).
+// 카드 박스 371×579 기준의 내부 절대좌표(x,y,w,h).
+export const performanceCards = [
+  {
+    title: "일본향 맞춤\n소재 제작",
+    desc: "브랜드와 제품에 맞는\nUSP 및 후킹 카피를 발굴하여\n그에 맞는 소재를 제작",
+    media: {
+      type: "image" as const,
+      src: "/figma/d9505405bdcab62d.png",
+      x: 62,
+      y: 286,
+      w: 184,
+      h: 184,
+    },
+  },
+  {
+    title: "현지 파트너사와\n함께하는 캠페인 운영",
+    desc: "일본에서 유효한 타겟 설정 및\n일본 현지 파트너사\n인사이트를 활용한 캠페인 운영",
+    media: {
+      type: "logos" as const,
+      logos: [
+        { src: "/figma/53af8d9ab720e4a1.png", x: 94, y: 303, w: 74, h: 49 }, // Meta
+        { src: "/figma/d6ce1f2bb1e25c60.png", x: 201, y: 309, w: 67, h: 69 }, // Google
+        { src: "/figma/102e01b3c120b2b0.png", x: 61, y: 396, w: 155, h: 69 }, // SingleONE
+        { src: "/figma/b14aa7d91022ce92.png", x: 234, y: 417, w: 96, h: 96 }, // LINE
+      ],
+    },
+  },
+  {
+    title: "결과 리뷰 및\n후속 캠페인 진행",
+    desc: "캠페인별 광고 데이터 수집, 분석 후\n인사이트 수집 후\n인사이트 기반 넥스트 소재 제작",
+    media: null,
+  },
+];
+
+// 하단 서비스 메뉴 — 4개 행(아코디언). offline/ip media 만 펼침 내용 확정.
+// (Figma node 320:669 하단 프레임 304:1219 + 497:567)
+export const japanServiceMenu = [
+  { key: "popup", title: "POPUP", sub: "계정 운영 대행", desc: "", images: [] as string[] },
+  {
+    key: "offline",
+    title: "OFFLINE",
+    sub: "",
+    desc: "일본 현지 강력한 네트워킹을 바탕으로 고객의 목표 달성에 필요한 전 과정을 함께 하겠습니다.",
+    images: [
+      "/figma/e391439e7b953c2a.png",
+      "/figma/76251b12a3ce834d.jpg",
+      "/figma/6841067468bfb14a.png",
+    ],
+  },
+  {
+    key: "ipmedia",
+    title: "IP MEDIA",
+    sub: "퍼포먼스 마케팅",
+    desc: "",
+    images: [
+      "/figma/9db04ec61aab8bd4.png",
+      "/figma/9d586924185801dd.png",
+      "/figma/9d137247b9606b73.png",
+    ],
+  },
+  {
+    key: "ooh",
+    title: "OOH",
+    sub: "일본 현지 네트워킹 바탕 일본 전략 수립",
+    desc: "",
+    images: [] as string[],
+  },
+];
+
 export const missionImg = "/figma/f91d138c2fd90fd4.png";
 export const visionImg = "/figma/4412c0485d51e00d.png";
 

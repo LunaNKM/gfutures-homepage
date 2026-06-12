@@ -1,4 +1,8 @@
-import { japanAccountCards, japanAccountIcons } from "@/lib/images";
+import {
+  japanAccountCards,
+  japanAccountIcons,
+  performanceCards,
+} from "@/lib/images";
 import ScrollReveal from "./ScrollReveal";
 import InfluencerCarousel from "./InfluencerCarousel";
 import JapanServiceMenu from "./JapanServiceMenu";
@@ -61,6 +65,53 @@ function AccordionRow({
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// Performance Marketing 카드 — 평소 옅은 회색, hover 시 위에서 검은 그라데이션이
+// 절반쯤 내려오고 제목·설명이 흰색으로 바뀐다. (Figma node 320:669, 510:177x)
+function PerfCard({ card }: { card: (typeof performanceCards)[number] }) {
+  return (
+    <div className="group relative h-[579px] w-[371px] shrink-0 overflow-hidden rounded-[28px] bg-[#fafafa]">
+      {/* hover 그라데이션 오버레이 */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.9) 22%, rgba(0,0,0,0) 55%)",
+        }}
+      />
+      <p className="absolute left-[67px] top-[53px] whitespace-pre-line text-[30px] font-bold leading-[43px] tracking-[-0.01em] text-black transition-colors duration-500 group-hover:text-white">
+        {card.title}
+      </p>
+      <p className="absolute left-[67px] top-[162px] whitespace-pre-line text-[21px] font-medium leading-[32px] tracking-[-0.01em] text-black/80 transition-colors duration-500 group-hover:text-white/90">
+        {card.desc}
+      </p>
+
+      {card.media?.type === "image" && (
+        <img
+          src={card.media.src}
+          alt=""
+          className="absolute rounded-[12px] object-contain"
+          style={{
+            left: card.media.x,
+            top: card.media.y,
+            width: card.media.w,
+            height: card.media.h,
+          }}
+        />
+      )}
+      {card.media?.type === "logos" &&
+        card.media.logos.map((l) => (
+          <img
+            key={l.src}
+            src={l.src}
+            alt=""
+            className="absolute object-contain"
+            style={{ left: l.x, top: l.y, width: l.w, height: l.h }}
+          />
+        ))}
     </div>
   );
 }
@@ -157,10 +208,10 @@ export default function JapanService() {
         </div>
       </ScrollReveal>
 
-      {/* ── Performance Marketing (white, h=964→733) ── */}
+      {/* ── Performance Marketing (white) — 3 카드 ── */}
       <ScrollReveal
         as="div"
-        className="relative h-[733px] w-full overflow-hidden bg-white"
+        className="relative h-[940px] w-full overflow-hidden bg-white"
       >
         <div id="jp-performance" className="absolute top-[-88px]" />
         <div className="absolute inset-0" style={CONTENT}>
@@ -175,10 +226,10 @@ export default function JapanService() {
             설계하고 메타, X, LINE, Google 등 일본 내 주 사용 채널 중심의 광고
             집행을 도와 드립니다.
           </p>
-          <div className="absolute left-[134px] top-[280px] flex h-[366px] w-[1180px] items-center justify-center rounded-[12px] bg-gray-soft">
-            <span className="display text-[37px] leading-none text-black">
-              GFU DASH
-            </span>
+          <div className="absolute left-[119px] top-[300px] flex gap-[24px]">
+            {performanceCards.map((card) => (
+              <PerfCard key={card.title} card={card} />
+            ))}
           </div>
         </div>
       </ScrollReveal>
