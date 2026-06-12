@@ -18,7 +18,7 @@ function Block({
   img: string;
 }) {
   return (
-    <div className="grid gap-8 md:grid-cols-[456px_420px] md:gap-[85px]">
+    <div className="grid gap-8 md:grid-cols-[456px_420px] md:justify-center md:gap-[85px]">
       <div>
         <h3 className="display text-[34px] leading-none md:text-[35px]">
           {kicker}
@@ -48,7 +48,7 @@ export default function MissionVision() {
   return (
     <section className="w-full bg-black px-6 py-16 text-white md:h-[1006px] md:px-0 md:py-0">
       <div className="mx-auto max-w-[1400px] md:pt-[225px]">
-        <div className="md:pl-[67px] md:pr-[33px]">
+        <div>
           <Block
             kicker="Mission"
             title="A Collective Built for Endless Expansion"
@@ -59,7 +59,7 @@ export default function MissionVision() {
 
         <div className="mt-14 h-px w-full bg-white/45 md:mt-[28px]" />
 
-        <div className="mt-14 md:mt-[119px] md:pl-[75px] md:pr-[33px]">
+        <div className="mt-14 md:mt-[119px]">
           <Block
             kicker="Vision"
             title="Global No.1 Strategic Partner"
