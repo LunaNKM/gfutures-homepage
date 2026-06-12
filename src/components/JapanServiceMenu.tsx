@@ -86,7 +86,7 @@ export default function JapanServiceMenu() {
               style={{ top: row.top, height: row.height }}
             >
               <span
-                className={`absolute left-[111px] text-[18px] font-medium leading-[26px] transition-all duration-300 group-hover:text-black ${
+                className={`absolute left-[111px] text-[14px] font-medium leading-[26px] transition-all duration-300 group-hover:text-black ${
                   expanded ? "text-black opacity-0" : "text-white"
                 }`}
                 style={{ top: row.subTop }}
@@ -94,7 +94,7 @@ export default function JapanServiceMenu() {
                 {row.sub}
               </span>
               <span
-                className={`display absolute left-[111px] text-[37px] leading-none transition-colors duration-300 group-hover:text-black ${
+                className={`display absolute left-[111px] text-[30px] leading-none transition-colors duration-300 group-hover:text-black ${
                   expanded ? "text-black" : "text-white"
                 }`}
                 style={{ top: row.titleTop }}
@@ -102,7 +102,7 @@ export default function JapanServiceMenu() {
                 {row.title}
               </span>
               <span
-                className={`absolute left-[1316px] text-[23px] leading-none transition-[transform,color] duration-300 group-hover:text-black ${
+                className={`absolute left-[1316px] text-[18px] leading-none transition-[transform,color] duration-300 group-hover:text-black ${
                   expanded ? "text-black" : "text-white"
                 }`}
                 style={{
@@ -121,19 +121,19 @@ export default function JapanServiceMenu() {
               style={{ top: row.top, height: row.height }}
             >
               <span
-                className="absolute left-[111px] text-[18px] font-medium leading-[26px] text-white transition-colors duration-300 group-hover:text-black"
+                className="absolute left-[111px] text-[14px] font-medium leading-[26px] text-white transition-colors duration-300 group-hover:text-black"
                 style={{ top: row.subTop }}
               >
                 {row.sub}
               </span>
               <span
-                className="display absolute left-[111px] text-[37px] leading-none text-white transition-colors duration-300 group-hover:text-black"
+                className="display absolute left-[111px] text-[30px] leading-none text-white transition-colors duration-300 group-hover:text-black"
                 style={{ top: row.titleTop }}
               >
                 {row.title}
               </span>
               <span
-                className="absolute left-[1316px] text-[23px] leading-none text-white transition-colors duration-300 group-hover:text-black"
+                className="absolute left-[1316px] text-[18px] leading-none text-white transition-colors duration-300 group-hover:text-black"
                 style={{ top: row.arrowTop }}
               >
                 ↗
@@ -161,7 +161,7 @@ export default function JapanServiceMenu() {
           <div className="relative w-full pb-[122px]">
             {/* & More 제목은 위의 메뉴 행이 그대로 펼쳐진 것이므로 여기서는 설명만. */}
             <div className="relative h-[106px]">
-              <p className="absolute left-[110px] top-[43px] text-[18px] font-medium leading-[26px] text-black">
+              <p className="absolute left-[110px] top-[43px] text-[14px] font-medium leading-[26px] text-black">
                 일본 현지 강력한 네트워킹을 바탕으로 고객의 목표 달성에 필요한 전
                 과정을 함께 하겠습니다.
               </p>
@@ -173,10 +173,10 @@ export default function JapanServiceMenu() {
                 className="relative w-full"
                 style={{ height: 396 }}
               >
-                <span className="display absolute left-[103px] top-0 inline-flex h-[27px] items-center rounded-full border border-black px-5 text-[18px] font-medium text-black">
+                <span className="display absolute left-[103px] top-0 inline-flex h-[27px] items-center rounded-full border border-black px-5 text-[14px] font-medium text-black">
                   {cat.label}
                 </span>
-                <span className="absolute left-[103px] top-[33px] text-[12px] font-medium text-black/55">
+                <span className="absolute left-[103px] top-[33px] text-[10px] font-medium text-black/55">
                   {cat.items}
                 </span>
                 {cardCols.map((col) => (
